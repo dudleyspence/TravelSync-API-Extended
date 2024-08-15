@@ -1,4 +1,4 @@
-**_Create the basic project directory_**
+### Create the basic project directory
 
 Initilize Git
 
@@ -87,3 +87,23 @@ pip install -r requirements.txt
 - .gitignore: Specifies files and directories that Git should ignore, like venv/, **pycache**/, and other generated files.
 
 Virtual environment directory (venv) (not typically included in version control).
+
+### Google Places API
+
+find the docs here
+
+```
+https://developers.google.com/maps/documentation/places/web-service/op-overview
+```
+
+**_create google cloud console account_**
+
+- create an account and add a billing option
+- create a project and enable the placesAPI (new)
+- then setup the OAuth consent screen (leave most of it empty as we havent got a logo etc yet)
+
+**_Install the google client library_**
+
+```
+pip install google-auth google-auth-oauthlib google-auth-httplib2
+```
