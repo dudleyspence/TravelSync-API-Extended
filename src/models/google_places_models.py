@@ -7,6 +7,7 @@ load_dotenv('../.env.googleAPI')
 
 async def fetch_place_info(address):
   api_key = os.getenv('GOOGLE_API_KEY')
+
 # Base URL
   base_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
 # Parameters in a dictionary
@@ -41,7 +42,7 @@ async def fetch_nearby_places(location, radius=1500, keyword=None, type=None):
   if keyword:
     params["keyword"] = keyword
   if type:
-    params["type"] = type
+    params["types"] = type
 
 # Send request and capture response
   response = requests.get(base_url, params=params)

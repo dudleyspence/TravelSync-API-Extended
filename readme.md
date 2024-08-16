@@ -41,13 +41,17 @@ in the main project directory make a src folder that will house the main code:
 make the first python file main.py
 
 ```
-Python Project Practice/
-│
-├── Practice1/
-│   ├── venv/
-│   └── src/ (or `app`)
-│       └── main.py
-
+my_project/
+├── src/
+│   └── my_module/
+│       ├── __init__.py
+│       └── calculator.py
+├── tests/
+│   ├── __init__.py
+│   └── test_calculator.py
+├── requirements.txt
+├── setup.py
+└── README.md
 ```
 
 **_Install first dependancy fastAPI:_**
@@ -88,22 +92,27 @@ pip install -r requirements.txt
 
 Virtual environment directory (venv) (not typically included in version control).
 
+For making API requests we will need the following dependancy
+
+```
+pip install requests
+```
+
 ### Google Places API
 
 find the docs here
 
 ```
-https://developers.google.com/maps/documentation/places/web-service/op-overview
+https://developers.google.com/maps/documentation/places/web-service/search-nearby#maps_http_places_nearbysearch-txt
 ```
 
 **_create google cloud console account_**
 
 - create an account and add a billing option
 - create a project and enable the placesAPI (new)
-- then setup the OAuth consent screen (leave most of it empty as we havent got a logo etc yet)
+- go to the credentials page and create an API (restricted)
+- add API to a .env file and add .env to the .gitignore
 
-**_Install the google client library_**
+\*\*\*TEST-DRIVEN DEVELOPMENT
 
-```
-pip install google-auth google-auth-oauthlib google-auth-httplib2
-```
+so i will be using pytest as it seems to be quite beginner friendly and is a widely adopted choice.
