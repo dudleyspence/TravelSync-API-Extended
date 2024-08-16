@@ -3,24 +3,27 @@ from fastapi import APIRouter, HTTPException
 
 router = APIRouter()
 
-
 @router.post('/places/info')
-async def get__place_info(address:str):
+async def get_place_info(address: str):
     try:
-        info = await fetch_place_info(address)
-        return {"info": info}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-
+        response = await fetch_place_info(address)
+        return {"placeInfo": response}
+    except HTTPException as err:
+        raise err #This is the errors we expect can happen e.g. 500, 404 
+    except Exception as err:
+        # this catches unexpected non HTTP errors like ValueError or TypeError (code bugs)
+        # it presents this error to the client as an internal server error 500 with the error message
+        # this means errors are handled in consistent mannor
+        raise HTTPException(status_code=500, detail=str(err))
 
 
 @router.post('/places/nearby')
 async def get_nearby_places(location: str, radius: int, type="tourist_attraction"):
     try:
-        locations = await fetch_nearby_places(location, radius, type)
-        return {"locations": locations}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        response = await fetch_nearby_places(location, radius, type)
+        return {"locations": response}
+    except HTTPException as err:
+        raise err
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=str(err))
 
