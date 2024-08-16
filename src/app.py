@@ -11,8 +11,6 @@ async def root():
     return {"message": "Welcome to the TravelSync API"}
 
 
-
-
 # address = "2 Bath Street LS29 8EL"
 
 # location = "-33.8670522, 151.1957362"

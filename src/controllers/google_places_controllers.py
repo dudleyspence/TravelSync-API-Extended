@@ -17,9 +17,9 @@ async def get__place_info(address:str):
 
 
 @router.post('/places/nearby')
-async def get_nearby_places(location: str, radius: int):
+async def get_nearby_places(location: str, radius: int, type="tourist_attraction"):
     try:
-        locations = await fetch_nearby_places(location, radius)
+        locations = await fetch_nearby_places(location, radius, type)
         return {"locations": locations}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -63,7 +63,7 @@ pip install fastapi uvicorn
 to then run the server we can use
 
 ```
-uvicorn main:app --reload
+uvicorn app:app --reload
 ```
 
 but this isnt needed yet.

@@ -28,7 +28,7 @@ async def fetch_place_info(address):
 
 
 
-async def fetch_nearby_places(location, radius=1500, keyword=None, type=None):
+async def fetch_nearby_places(location, radius, place_type):
   api_key = os.getenv('GOOGLE_API_KEY')
 # Base URL
   base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
@@ -36,13 +36,12 @@ async def fetch_nearby_places(location, radius=1500, keyword=None, type=None):
   params = {
     "radius":radius,
     "location":location,
+    "type": place_type,
     "key": api_key,
   }
 
-  if keyword:
-    params["keyword"] = keyword
-  if type:
-    params["types"] = type
+  # if keyword:
+  #   params["keyword"] = keyword
 
 # Send request and capture response
   response = requests.get(base_url, params=params)
@@ -52,4 +51,3 @@ async def fetch_nearby_places(location, radius=1500, keyword=None, type=None):
   else:
     return None
   
-
