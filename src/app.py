@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from src.controllers.google_places_controllers import router as google_places_router
+from .controllers.google_places_controllers import router as google_places_router
 
 app = FastAPI()
 
