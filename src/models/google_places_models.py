@@ -3,8 +3,9 @@ from fastapi import HTTPException
 from dotenv import load_dotenv
 import os
 
+
 # Load the environment variables from the .env file
-load_dotenv('/home/muhammadhammad/northcoders/projects/TravelSync-API/.env.googleAPI')
+load_dotenv("../TravelSync-API/.env.googleAPI")
 
 async def fetch_place_info(address):
   api_key = os.getenv('GOOGLE_API_KEY')
