@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 
 # Load the environment variables from the .env file
-load_dotenv('../../TravelSync-API/.env.googleAPI')
+load_dotenv('/Users/dudleyspence/Northcoders/projects/TravelSync/TravelSync-API/.env.googleAPI')
 
 async def fetch_place_info(address):
   api_key = os.getenv('GOOGLE_API_KEY')
@@ -13,6 +13,7 @@ async def fetch_place_info(address):
   if api_key:
     print("API Key loaded successfully:", api_key)
   else:
+    print("hello")
     print("API Key not found. Please check your .env file and path.")
 
 # Base URL
@@ -22,7 +23,7 @@ async def fetch_place_info(address):
    "input": address,
    "inputtype": "textquery",
    "language": "en",
-   "fields": "formatted_address,name,business_status,place_id",
+   "fields": "formatted_address,name,business_status,place_id,geometry",
    "key": api_key,
   }
 
