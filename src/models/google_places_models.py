@@ -5,7 +5,7 @@ import os
 
 
 # Load the environment variables from the .env file
-#load_dotenv("../TravelSync-API/.env.googleAPI") 
+load_dotenv("../TravelSync-API/.env.googleAPI") 
 # needed in development but not on render 
 
 async def fetch_place_info(address):
