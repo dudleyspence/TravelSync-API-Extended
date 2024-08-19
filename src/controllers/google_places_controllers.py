@@ -27,7 +27,7 @@ async def get_place_info(address):
 
 
 @router.post('/places/nearby')
-async def get_nearby_places(location: str, radius: int, type="tourist_attraction"):
+async def get_nearby_places(location: str, radius=2000, type="tourist_attraction"):
     try:
         response = await fetch_nearby_places(location, radius, type)
         return {"locations": response}
