@@ -1,9 +1,8 @@
-from src.models.google_places_models import fetch_nearby_places, fetch_place_info
+from models.google_places_models import fetch_nearby_places, fetch_place_info
 from fastapi import APIRouter, HTTPException, Request
 
 
 router = APIRouter()
-
 @router.post('/places/info')
 async def get_place_info(address):
 
