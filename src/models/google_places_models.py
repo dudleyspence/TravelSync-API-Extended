@@ -4,10 +4,16 @@ from dotenv import load_dotenv
 import os
 
 # Load the environment variables from the .env file
-load_dotenv('../.env.googleAPI')
+load_dotenv('../../TravelSync-API/.env.googleAPI')
 
 async def fetch_place_info(address):
   api_key = os.getenv('GOOGLE_API_KEY')
+  
+  # Print the API key to verify it's loaded correctly
+  if api_key:
+    print("API Key loaded successfully:", api_key)
+  else:
+    print("API Key not found. Please check your .env file and path.")
 
 # Base URL
   base_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
@@ -41,6 +47,13 @@ async def fetch_place_info(address):
 
 async def fetch_nearby_places(location, radius, place_type):
   api_key = os.getenv('GOOGLE_API_KEY')
+
+  # Print the API key to verify it's loaded correctly
+  if api_key:
+      print("API Key loaded successfully:", api_key)
+  else:
+      print("API Key not found. Please check your .env file and path.")
+      
 # Base URL
   base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
 # Parameters in a dictionary
