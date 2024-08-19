@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from controllers.google_places_controllers import router as google_places_router
-
+import sys
+print("PYTHONPATH:", sys.path)
 
 app = FastAPI()
 
