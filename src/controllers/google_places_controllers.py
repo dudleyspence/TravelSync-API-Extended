@@ -1,4 +1,4 @@
-from ..models.google_places_models import fetch_nearby_places, fetch_place_info
+from src.models.google_places_models import fetch_nearby_places, fetch_place_info
 from fastapi import APIRouter, HTTPException, Request
 
 
