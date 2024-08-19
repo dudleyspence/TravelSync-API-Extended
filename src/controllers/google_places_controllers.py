@@ -1,13 +1,14 @@
 from ..models.google_places_models import fetch_nearby_places, fetch_place_info
 from fastapi import APIRouter, HTTPException, Request
 
+
 router = APIRouter()
 
 @router.post('/places/info')
-async def get_place_info(request: Request):
+async def get_place_info(address):
 
-    data = await request.json()  # Extract JSON data from the request body
-    address = data.get("address")
+    # data = await request.json()  # Extract JSON data from the request body
+    # address = data.get("address")
     
     if not address:
         raise HTTPException(status_code=422, detail="Address field is required")
@@ -31,6 +32,7 @@ async def get_nearby_places(location: str, radius: int, type="tourist_attraction
         response = await fetch_nearby_places(location, radius, type)
         return {"locations": response}
     except HTTPException as err:
+        print(err)
         raise err
     except Exception as err:
         raise HTTPException(status_code=500, detail=str(err))

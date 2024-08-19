@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 
 # Load the environment variables from the .env file
-load_dotenv('/Users/dudleyspence/Northcoders/projects/TravelSync/TravelSync-API/.env.googleAPI')
+load_dotenv('/home/muhammadhammad/northcoders/projects/TravelSync-API/.env.googleAPI')
 
 async def fetch_place_info(address):
   api_key = os.getenv('GOOGLE_API_KEY')
@@ -35,9 +35,9 @@ async def fetch_place_info(address):
             # dictionaries have the .get(key, default_value)
             # having a default value avoids the keyError 
             locationInfo = response.json().get("candidates", [])
-            
             # the request might be successful 200 but return no results so we need to force a 404 not found
             if not locationInfo:
+              print(locationInfo)
               raise HTTPException(status_code=404, detail="No results found")
             
             return locationInfo
@@ -83,7 +83,8 @@ async def fetch_nearby_places(location, radius, place_type):
             "co-ords": place.get("geometry", {}).get("location", {}),
             "place_id": place.get("place_id", ""),
             "rating": place.get("rating", None),
-            "user_ratings_total": place.get("user_ratings_total", None)
+            "user_ratings_total": place.get("user_ratings_total", None),
+            "types": place.get("types", [])
         }
         filtered_nearbyPlaces.append(filtered_place)
 
