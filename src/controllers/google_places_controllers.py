@@ -1,4 +1,4 @@
-from src.models.google_places_models import fetch_nearby_places, fetch_place_info
+from src.models.google_places_models import fetch_nearby_places, fetch_place_info, fetch_place_detail
 from fastapi import APIRouter, HTTPException, Request
 
 
@@ -36,3 +36,13 @@ async def get_nearby_places(location: str, radius=2000, type="tourist_attraction
     except Exception as err:
         raise HTTPException(status_code=500, detail=str(err))
 
+
+@router.post('/places/detail')
+async def get_place_detail(place_id: str):
+    try:
+        response = await fetch_place_detail(place_id)
+        return {"details": response}
+    except HTTPException as err:
+        raise err
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=str(err))

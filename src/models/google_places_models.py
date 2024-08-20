@@ -98,3 +98,37 @@ async def fetch_nearby_places(location, radius, place_type):
 
 
   
+async def fetch_place_detail(place_id):
+  api_key = os.getenv('GOOGLE_API_KEY')
+  
+  # Print the API key to verify it's loaded correctly
+  if api_key:
+    print("API Key loaded successfully:", api_key)
+  else:
+    print("hello")
+    print("API Key not found. Please check your .env file and path.")
+
+# Base URL
+  base_url = "https://maps.googleapis.com/maps/api/place/details/json"
+# Parameters in a dictionary
+  print(place_id)
+  params = {
+   "place_id": place_id,
+   "language": "en",
+   "fields": "formatted_address,name,geometry,place_id,rating,reviews,website,formatted_phone_number,opening_hours,opening_hours,editorial_summary,photos,types",
+   "key": api_key,
+  }
+  # ,name,business_status,place_id,geometry, photo, user_ratings_total, rating, reviews, website, formatted_phone_number, current_opening_hours, international_phone_number, type, takeout
+
+  async with httpx.AsyncClient() as client:
+    response = await client.get(base_url, params=params)
+    if response.status_code == 200:
+            placeDetails = response.json().get("result", [])
+            if not placeDetails:
+              print(placeDetails)
+              raise HTTPException(status_code=404, detail="No results found")
+            
+            return placeDetails
+
+    else:
+        raise HTTPException(status_code=response.status_code, detail="Error fetching place details")
