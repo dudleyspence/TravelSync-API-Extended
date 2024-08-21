@@ -25,7 +25,7 @@ async def fetch_place_info(address):
    "input": address,
    "inputtype": "textquery",
    "language": "en",
-   "fields": "formatted_address,name,business_status,place_id,geometry",
+   "fields": "formatted_address,name,business_status,place_id,geometry,rating",
    "key": api_key,
   }
 
@@ -118,7 +118,7 @@ async def fetch_place_detail(place_id):
    "fields": "formatted_address,name,geometry,place_id,rating,reviews,website,formatted_phone_number,opening_hours,opening_hours,editorial_summary,photos,types",
    "key": api_key,
   }
-  # ,name,business_status,place_id,geometry, photo, user_ratings_total, rating, reviews, website, formatted_phone_number, current_opening_hours, international_phone_number, type, takeout
+  
 
   async with httpx.AsyncClient() as client:
     response = await client.get(base_url, params=params)
