@@ -29,7 +29,6 @@ db_dependency = Annotated[Session, Depends(get_db)]
 
 
 router = APIRouter()
-
 @router.post('/users')
 async def post_users():
     await create_users(UserBase, db_dependency)
