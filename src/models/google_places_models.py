@@ -82,7 +82,7 @@ async def fetch_nearby_places(location, radius, place_type):
     for place in nearbyPlaces:
         filtered_place = {
             "name": place.get("name", ""),
-            "co-ords": place.get("geometry", {}).get("location", {}),
+            "geometry": place.get("geometry", {}),
             "place_id": place.get("place_id", ""),
             "rating": place.get("rating", None),
             "user_ratings_total": place.get("user_ratings_total", None),
