@@ -2,10 +2,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-URL_DATABASE = ''
+URL_DATABASE = 'mysql+pymtsql//root:Hammad#123@localhost:3306'
 
 engine = create_engine(URL_DATABASE)
 
-SessionLocal = Sessionmaker(autocommit=False, autoflush=Flase, bind=engine)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
