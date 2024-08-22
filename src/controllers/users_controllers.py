@@ -5,7 +5,7 @@
 
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, EmailStr
-from src.db.database import SessionLocal
+from src.db import SessionLocal
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from typing import Annotated
