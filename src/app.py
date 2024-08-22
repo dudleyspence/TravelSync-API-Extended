@@ -1,9 +1,13 @@
 from fastapi import FastAPI
-from src.controllers.google_places_controllers import router as google_places_router
+from src.routers import users, groups, itineraries, itinerary_events, google_places
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.models import Base  
+from src.db import engine
 
 app = FastAPI()
+
+Base.metadata.create_all(bind=engine)
 
 # Allow all origins
 app.add_middleware(
@@ -16,8 +20,12 @@ app.add_middleware(
 
 
 
-app.include_router(google_places_router, prefix="/api")
-# app.include_router(users_router, prefix="/api")
+# using tags on routers is just to improve the /docs page accuracy
+app.include_router(users.router, prefix="/api/users", tags=["users"])
+app.include_router(groups.router, prefix="api/groups", tags=["groups"])
+app.include_router(itineraries.router, prefix="api/itineraries", tags=["itineraries"])
+app.include_router(itinerary_events.router, prefix="api/itinerary-events", tags=["itinerary events"])
+app.include_router(google_places.router, prefix="api/places", tags=["google places"])
 
 
 @app.get("/")
