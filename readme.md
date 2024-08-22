@@ -60,10 +60,10 @@ my_project/
 pip install fastapi uvicorn
 ```
 
-to then run the server we can use
+to then run the server we can use from the root dir
 
 ```
-uvicorn app:app --reload
+fastapi dev src/app.py
 ```
 
 but this isnt needed yet.
@@ -116,3 +116,22 @@ https://developers.google.com/maps/documentation/places/web-service/search-nearb
 \*\*\*TEST-DRIVEN DEVELOPMENT
 
 so i will be using pytest as it seems to be quite beginner friendly and is a widely adopted choice.
+to run tests we need to use the command
+
+```
+pytest
+```
+
+\*\*\*Setting up the database
+
+to setup the database run
+
+```
+python src/db/setup_db.py
+```
+
+then to seed the database
+
+```
+python -m src.db.seed
+```
