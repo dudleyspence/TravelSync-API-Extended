@@ -21,7 +21,7 @@ def test_places_nearby_200_with_default_type():
         assert "tourist_attraction" in place["types"]
         assert is_non_empty_string(place["name"])
         assert is_non_empty_string(place["place_id"])
-        assert is_valid_coordinates(place["co-ords"])
+        assert is_valid_coordinates(place["geometry"]["location"])
 
 
 
@@ -40,7 +40,7 @@ def test_places_nearby_200_with_specified_type():
         assert "hospital" in place["types"]
         assert is_non_empty_string(place["name"])
         assert is_non_empty_string(place["place_id"])
-        assert is_valid_coordinates(place["co-ords"])
+        assert is_valid_coordinates(place["geometry"]["location"])
 
 
 
