@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv(".env.development")
 
 
-# Function o create the database if it doesn't exist
+# Function to create the database if it doesn't exist
 def create_database():
     connection = pymysql.connect(
         host=os.getenv('DB_HOST'),
@@ -18,6 +18,7 @@ def create_database():
     )
     with connection.cursor() as cursor:
         name=os.getenv('DB_NAME')
+        cursor.execute(f"DROP DATABASE IF EXISTS {name};")
         cursor.execute(f"CREATE DATABASE IF NOT EXISTS {name};")
     connection.close()
 
@@ -69,6 +70,8 @@ if __name__ == "__main__":
 
     # Step 2: Setup the database tables before seeding
     Base.metadata.create_all(bind=engine)
+
+
     db = SessionLocal()
     try:
         seed_data(db)
