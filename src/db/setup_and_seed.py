@@ -5,11 +5,12 @@ import json
 import pymysql
 import os
 from dotenv import load_dotenv
-load_dotenv(".env.development")
 
 ENV = os.getenv("FASTAPI_ENV", "development")
 
-
+if ENV == "development":
+    load_dotenv(".env.development")
+# the production URL is given and loaded directly by railway
 
 # Function to create the database if it doesn't exist
 
