@@ -73,6 +73,8 @@ if __name__ == "__main__":
     # Step 1: Create the database
     if ENV == "development":
         create_database()
+    else:
+        Base.metadata.drop_all(bind=engine)
 
     # Step 2: Setup the database tables before seeding
     Base.metadata.create_all(bind=engine)
