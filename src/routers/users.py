@@ -25,13 +25,11 @@ def post_user(user: UserCreate, db: Session = Depends(get_db)) -> UserResponse:
     if db_user:
         raise HTTPException(status_code=400, detail="Email already in use")
 
-
     new_user = User(
         email=user.email,
         username=user.username,
         password=hash_password(user.password)
     )
-
 
     db.add(new_user)
     db.commit()

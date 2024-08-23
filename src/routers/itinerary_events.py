@@ -6,7 +6,6 @@ from src.db.database import get_db
 
 router = APIRouter()
 
-
 @router.delete('/{event_id}', response_model=ItineraryEventResponse)
 def delete_event(event_id: int, db: Session = Depends(get_db)) -> ItineraryEventResponse:
     db_event = db.query(ItineraryEvent).filter(ItineraryEvent.id == event_id).first()
