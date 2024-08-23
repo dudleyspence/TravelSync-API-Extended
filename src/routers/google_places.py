@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException, Request
 
 
 router = APIRouter()
-@router.post('/places/info')
+@router.post('/info')
 async def get_place_info(address):
 
     # data = await request.json()  # Extract JSON data from the request body
@@ -25,7 +25,7 @@ async def get_place_info(address):
         raise HTTPException(status_code=500, detail=str(err))
 
 
-@router.post('/places/nearby')
+@router.post('/nearby')
 async def get_nearby_places(location: str, radius=2000, type="tourist_attraction"):
     try:
         response = await fetch_nearby_places(location, radius, type)
@@ -37,7 +37,7 @@ async def get_nearby_places(location: str, radius=2000, type="tourist_attraction
         raise HTTPException(status_code=500, detail=str(err))
 
 
-@router.post('/places/detail')
+@router.post('/detail')
 async def get_place_detail(place_id: str):
     try:
         response = await fetch_place_detail(place_id)
