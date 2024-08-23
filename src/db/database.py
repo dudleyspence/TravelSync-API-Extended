@@ -4,9 +4,13 @@ from dotenv import load_dotenv
 import os
 
 
-load_dotenv(".env.development")
+ENV = os.getenv("FASTAPI_ENV", "development")
 
-DATABASE_URL = f"mysql+pymysql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+if ENV == "development":
+    load_dotenv(".env.development")
+# the production URL is given and loaded directly by railway
+
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 
 engine = create_engine(DATABASE_URL) # Establishes a connection to the database (database must already exist for this)
