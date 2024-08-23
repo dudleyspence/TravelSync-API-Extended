@@ -7,8 +7,12 @@ import os
 from dotenv import load_dotenv
 load_dotenv(".env.development")
 
+ENV = os.getenv("FASTAPI_ENV", "development")
+
+
 
 # Function to create the database if it doesn't exist
+
 def create_database():
     connection = pymysql.connect(
         host=os.getenv('DB_HOST'),
@@ -66,7 +70,8 @@ def seed_data(db: Session):
 # If this script is run directly, seed the database
 if __name__ == "__main__":
     # Step 1: Create the database
-    create_database()
+    if ENV == "development":
+        create_database()
 
     # Step 2: Setup the database tables before seeding
     Base.metadata.create_all(bind=engine)
