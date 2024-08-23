@@ -124,14 +124,10 @@ pytest
 
 \*\*\*Setting up the database
 
-to setup the database run
+to create the database and then seed it
+
+run this command from the root dir
 
 ```
-python src/db/setup_db.py
-```
-
-then to seed the database
-
-```
-python -m src.db.seed
+python -m src.db.setup_and_seed
 ```

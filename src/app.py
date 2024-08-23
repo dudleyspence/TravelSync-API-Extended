@@ -22,10 +22,10 @@ app.add_middleware(
 
 # using tags on routers is just to improve the /docs page accuracy
 app.include_router(users.router, prefix="/api/users", tags=["users"])
-app.include_router(groups.router, prefix="api/groups", tags=["groups"])
-app.include_router(itineraries.router, prefix="api/itineraries", tags=["itineraries"])
-app.include_router(itinerary_events.router, prefix="api/itinerary-events", tags=["itinerary events"])
-app.include_router(google_places.router, prefix="api/places", tags=["google places"])
+app.include_router(groups.router, prefix="/api/groups", tags=["groups"])
+app.include_router(itineraries.router, prefix="/api/itineraries", tags=["itineraries"])
+app.include_router(itinerary_events.router, prefix="/api/itinerary-events", tags=["itinerary events"])
+app.include_router(google_places.router, prefix="/api/places", tags=["google places"])
 
 
 @app.get("/")

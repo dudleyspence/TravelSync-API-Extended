@@ -5,4 +5,4 @@ from .group import Group, GroupMember
 from .itinerary import Itinerary
 from .itinerary_event import ItineraryEvent
 
-from db.database import Base
+from src.db import Base
