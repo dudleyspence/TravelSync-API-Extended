@@ -10,7 +10,9 @@ if ENV == "development":
     load_dotenv(".env.development")
 # the production URL is given and loaded directly by railway
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("MYSQL_URL")
+
+print(DATABASE_URL)
 
 
 engine = create_engine(DATABASE_URL) # Establishes a connection to the database (database must already exist for this)
