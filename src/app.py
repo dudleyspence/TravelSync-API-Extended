@@ -16,7 +16,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"], 
     allow_headers=["*"], 
-
+)
 
 
 # using tags on routers is just to improve the /docs page accuracy
