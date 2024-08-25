@@ -4,8 +4,8 @@ class GroupMemberBase(BaseModel):
     user_id: int
     group_id: int
 
-class GroupMemberCreate(GroupMemberBase):
-    pass
+class GroupMemberCreate(BaseModel):
+    user_id: int
 
 class GroupMemberResponse(GroupMemberBase):
     id: int
