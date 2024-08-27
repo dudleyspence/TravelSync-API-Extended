@@ -5,7 +5,6 @@ from src.models import Itinerary, ItineraryEvent, File as FileModel
 from src.db.database import get_db
 from typing import List
 import pyrebase
-import uuid
 
 firebase_config = {
     "apiKey": "AIzaSyAnKhVLWe2wxmVZP5nwIPoiH7DLXIMevnM",
@@ -108,10 +107,8 @@ def post_file(itinerary_id: int, file: UploadFile = File(...), db: Session = Dep
     db_event = db.query(Itinerary).filter(Itinerary.id == itinerary_id).first()
     if not db_event:
         raise HTTPException(status_code=404, detail="Itinerary not found")
-    
-    unique_filename = f"{uuid.uuid4()}-{file.filename}"
 
-    blob = storage.child(f"{itinerary_id}/{unique_filename}")
+    blob = storage.child(f"{file.filename}")
     blob.put(file.file)
 
     file_url = blob.get_url(None)
@@ -119,7 +116,7 @@ def post_file(itinerary_id: int, file: UploadFile = File(...), db: Session = Dep
     new_file = FileModel(
         file_name=file.filename,
         itinerary_id=itinerary_id,
-        file_path=file_url
+        file_path=file_url.replace("/?alt=media", "").rstrip("/")
     )
 
     db.add(new_file)
@@ -128,3 +125,18 @@ def post_file(itinerary_id: int, file: UploadFile = File(...), db: Session = Dep
 
     return new_file
 
+
+@router.delete('/{itinerary_id}/files', response_model=FileResponse)
+def delete_file(itinerary_id: int, file_id: int, db: Session = Depends(get_db)) -> FileResponse:
+    db_event = db.query(Itinerary).filter(Itinerary.id == itinerary_id).first()
+    if not db_event:
+        raise HTTPException(status_code=404, detail="Itinerary not found")
+
+    file_delete = db.query(FileModel).filter(FileModel.id == file_id, FileModel.itinerary_id == itinerary_id).first()
+    if not file_delete:
+        raise HTTPException(status_code=404, detail="File not found")
+
+    db.delete(file_delete)
+    db.commit()
+
+    return file_delete
