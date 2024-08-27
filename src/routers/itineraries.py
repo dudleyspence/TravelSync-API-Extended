@@ -35,7 +35,7 @@ def post_itinerary(itinerary: ItineraryCreate, db: Session = Depends(get_db)) ->
 
 
 
-@router.get('/{itinerary_id}/itinerary-events', response_model=List[ItineraryEventResponse])
+@router.get('/{itinerary_id}/events', response_model=List[ItineraryEventResponse])
 def get_itinerary_events(itinerary_id: int, db: Session = Depends(get_db)) -> ItineraryEventResponse:
     db_itinerary_event = db.query(ItineraryEvent).filter(ItineraryEvent.itinerary_id == itinerary_id)
     print(db_itinerary_event)
@@ -44,14 +44,38 @@ def get_itinerary_events(itinerary_id: int, db: Session = Depends(get_db)) -> It
     return db_itinerary_event 
 
 
-@router.post('/{itinerary_id}/itinerary-events', response_model=ItineraryEventResponse)
-def post_itinerary_events(itinerary_id: int, itinerary_event: ItineraryEventCreate, db: Session = Depends(get_db)) -> ItineraryEventResponse:
-    new_event = ItineraryEvent(**itinerary_event.model_dump(), itinerary_id=itinerary_id)
-    db.add(new_event)
-    db.commit()
-    db.refresh(new_event)
-    return new_event
+@router.post('/{itinerary_id}/events', response_model=ItineraryResponse)
+def add_itinerary_event(itinerary_id: int, event_data: ItineraryEventCreate, db: Session = Depends(get_db)) -> ItineraryResponse:
+    # fetch the itinerary
+    itinerary = db.query(Itinerary).filter(Itinerary.id == itinerary_id).first()
+    if not itinerary:
+        raise HTTPException(status_code=404, detail="Itinerary not found")
 
+    # create new itinerary event
+    new_event = ItineraryEvent(**event_data.model_dump(), itinerary_id=itinerary_id)
+    db.add(new_event)
+    db.commit()  # to generate ID for event event
+    db.refresh(new_event)
+
+    # update itinerary order
+    if itinerary.itinerary_order:
+        itinerary.itinerary_order.append(new_event.id)
+    else:
+        itinerary.itinerary_order = [new_event.id]
+    db.commit()
+    db.refresh(itinerary)
+
+    return itinerary
+
+
+@router.get('/{itinerary_id}', response_model=ItineraryResponse)
+def get_itinerary(itinerary_id: int, db: Session = Depends(get_db)) -> ItineraryResponse:
+
+    itinerary = db.query(Itinerary).filter(Itinerary.id == itinerary_id).first()
+    if not itinerary:
+        raise HTTPException(status_code=404, detail="Itinerary not found")
+
+    return itinerary
 
 
 @router.patch('/{itinerary_id}', response_model=ItineraryResponse)
