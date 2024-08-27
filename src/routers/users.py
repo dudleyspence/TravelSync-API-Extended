@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from src.schemas import UserCreate, UserResponse, UserWithGroupsResponse
-from src.models import User
+from src.schemas import UserCreate, UserResponse, GroupResponse
+from src.models import User, GroupMember
 from src.db.database import get_db
 import bcrypt
+from typing import List
+
 
 def hash_password(password: str) -> str:
     salt = bcrypt.gensalt()
@@ -39,9 +41,14 @@ def post_user(user: UserCreate, db: Session = Depends(get_db)) -> UserResponse:
 
 
 # gets all the groups for a given user
-@router.get('/{user_id}/groups', response_model=UserWithGroupsResponse)
+@router.get('/{user_id}/groups', response_model=List[GroupResponse])
 def get_user_groups(user_id: int, db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    return [membership.group for membership in user.group_members] 
+    group_memberships = db.query(GroupMember).filter(GroupMember.user_id == user_id).all()
+
+    if not group_memberships:
+        raise HTTPException(status_code=404, detail="User not found or no groups found")
+
+    # Extract groups from memberships
+    groups = [membership.group for membership in group_memberships]
+
+    return groups
