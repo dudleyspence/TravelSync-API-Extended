@@ -6,8 +6,7 @@ class ItineraryEventBase(BaseModel):
     desc: str
     coords: str
     place_id: str
-    order: int
-
+    
 class ItineraryEventCreate(ItineraryEventBase):
     pass
 

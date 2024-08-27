@@ -12,6 +12,5 @@ class ItineraryEvent(Base):
     desc = Column(String(200), nullable=True)
     coords = Column(String(400), nullable=False)
     place_id = Column(String(400), nullable=False)
-    order = Column(Integer, nullable=False)
     created_at = Column(DateTime, default=func.now())
 
