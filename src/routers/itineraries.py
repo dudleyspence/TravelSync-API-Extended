@@ -1,10 +1,25 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.orm import Session
-from src.schemas import ItineraryCreate, ItineraryResponse, ItineraryEventCreate, ItineraryEventResponse
-from src.models import Itinerary
-from src.models import ItineraryEvent
+from src.schemas import ItineraryCreate, ItineraryResponse, ItineraryEventCreate, ItineraryEventResponse, FileCreate, FileResponse
+from src.models import Itinerary, ItineraryEvent, File as FileModel
 from src.db.database import get_db
 from typing import List
+import pyrebase
+import uuid
+
+firebase_config = {
+    "apiKey": "AIzaSyAnKhVLWe2wxmVZP5nwIPoiH7DLXIMevnM",
+    "authDomain": "travelsync-e8555.firebaseapp.com",
+    "projectId": "travelsync-e8555",
+    "storageBucket": "travelsync-e8555.appspot.com",
+    "messagingSenderId": "673531725643",
+    "appId": "1:673531725643:web:f8a4d304cf94c443118ace",
+    "measurementId": "G-3S0VBXVL5H",
+    "databaseURL": ""  
+}
+
+firebase = pyrebase.initialize_app(firebase_config)
+storage = firebase.storage()
 
 router = APIRouter()
 
@@ -24,3 +39,28 @@ def post_itinerary_events(itinerary_id: int, itinerary_event: ItineraryEventCrea
     db.commit()
     db.refresh(new_event)
     return new_event
+
+@router.post('/{itinerary_id}', response_model=FileResponse)
+def post_file(itinerary_id: int, file: UploadFile = File(...), db: Session = Depends(get_db)) -> FileResponse:
+    db_event = db.query(ItineraryEvent).filter(ItineraryEvent.id == itinerary_id).first()
+    if not db_event:
+        raise HTTPException(status_code=404, detail="Event not found")
+    
+    unique_filename = f"{uuid.uuid4()}-{file.filename}"
+
+    blob = storage.child(f"{itinerary_id}/{unique_filename}")
+    blob.put(file.file)
+
+    file_url = blob.get_url(None)
+
+    new_file = FileModel(
+        file_name=file.filename,
+        itinerary_id=itinerary_id,
+        file_path=file_url
+    )
+
+    db.add(new_file)
+    db.commit()
+    db.refresh(new_file)
+
+    return new_file
