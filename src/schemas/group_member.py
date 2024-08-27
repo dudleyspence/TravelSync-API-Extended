@@ -12,3 +12,4 @@ class GroupMemberResponse(GroupMemberBase):
 
     class Config:
         orm_mode = True
+
