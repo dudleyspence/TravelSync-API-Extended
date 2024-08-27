@@ -40,11 +40,23 @@ def post_itinerary_events(itinerary_id: int, itinerary_event: ItineraryEventCrea
     db.refresh(new_event)
     return new_event
 
-@router.post('/{itinerary_id}', response_model=FileResponse)
-def post_file(itinerary_id: int, file: UploadFile = File(...), db: Session = Depends(get_db)) -> FileResponse:
-    db_event = db.query(ItineraryEvent).filter(ItineraryEvent.id == itinerary_id).first()
+
+@router.get('/{itinerary_id}/files', response_model=List[FileResponse])
+def get_files(itinerary_id: int, db: Session = Depends(get_db)) -> List[FileResponse]:
+    db_event = db.query(Itinerary).filter(Itinerary.id == itinerary_id).first()
     if not db_event:
-        raise HTTPException(status_code=404, detail="Event not found")
+        raise HTTPException(status_code=404, detail="Itinerary not found")
+    
+    files = db.query(FileModel).filter(FileModel.itinerary_id == itinerary_id).all()
+
+    return files
+
+
+@router.post('/{itinerary_id}/files', response_model=FileResponse)
+def post_file(itinerary_id: int, file: UploadFile = File(...), db: Session = Depends(get_db)) -> FileResponse:
+    db_event = db.query(Itinerary).filter(Itinerary.id == itinerary_id).first()
+    if not db_event:
+        raise HTTPException(status_code=404, detail="Itinerary not found")
     
     unique_filename = f"{uuid.uuid4()}-{file.filename}"
 
@@ -64,3 +76,4 @@ def post_file(itinerary_id: int, file: UploadFile = File(...), db: Session = Dep
     db.refresh(new_file)
 
     return new_file
+
