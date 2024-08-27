@@ -44,7 +44,7 @@ def post_user(user: UserCreate, db: Session = Depends(get_db)) -> UserResponse:
 @router.get('/{user_id}/groups', response_model=List[GroupResponse])
 def get_user_groups(user_id: int, db: Session = Depends(get_db)):
     group_memberships = db.query(GroupMember).filter(GroupMember.user_id == user_id).all()
-
+    
     if not group_memberships:
         raise HTTPException(status_code=404, detail="User not found or no groups found")
 

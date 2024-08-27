@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from src.schemas import GroupCreate, GroupResponse, GroupMemberResponse
-from src.models import Group
+from src.schemas import GroupCreate, GroupResponse, GroupMemberResponse, ItineraryResponse
+from src.models import Group, Itinerary
 from src.db.database import get_db
 from .utils import generate_join_code
 
@@ -66,3 +66,8 @@ def update_group(group_id: int, group: GroupCreate, db: Session = Depends(get_db
     
     return db_group
 
+
+@router.get('/{group_id}/itinerary', response_model=ItineraryResponse)
+def get_itinerary_by_group_id(group_id: int, db: Session = Depends(get_db)) -> ItineraryResponse:
+    db_itinerary = db.query(Itinerary).filter(Itinerary.group_id == group_id).first()
+    return db_itinerary
