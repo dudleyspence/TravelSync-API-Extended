@@ -3,3 +3,4 @@ from .group import GroupCreate, GroupResponse, UserWithGroupsResponse, JoinGroup
 from .group_member import GroupMemberCreate, GroupMemberResponse
 from .itinerary import ItineraryCreate, ItineraryResponse, ItineraryUpdate
 from .itinerary_event import ItineraryEventCreate, ItineraryEventResponse
+from .files import FileCreate,  FileResponse
