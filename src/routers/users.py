@@ -19,7 +19,7 @@ router = APIRouter()
 
 @router.post('/user', response_model=UserResponse)
 def get_user(user: UserLogin, db: Session = Depends(get_db)) -> UserResponse:
-    db_user = db.query(User).filter(User.email == user.email).first()
+    db_user = db.query(User).filter(User.username == user.username).first()
     if db_user is None or not verify_password(user.password, db_user.password):
         raise HTTPException(status_code=404, detail="Invalid email or password")
     return db_user
