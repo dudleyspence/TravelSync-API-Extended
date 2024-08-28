@@ -9,7 +9,6 @@ class ItineraryEvent(Base):
     id = Column(Integer, primary_key=True, index=True)
     itinerary_id = Column(Integer, ForeignKey('itineraries.id', ondelete='CASCADE'), nullable=False)
     name = Column(String(200), nullable=False)
-    desc = Column(String(200), nullable=True)
     coords = Column(String(400), nullable=False)
     place_id = Column(String(400), nullable=False)
     created_at = Column(DateTime, default=func.now())

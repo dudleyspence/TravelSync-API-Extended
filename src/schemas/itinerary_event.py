@@ -3,7 +3,6 @@ from datetime import datetime
 
 class ItineraryEventBase(BaseModel):
     name: str
-    desc: str
     coords: str
     place_id: str
     

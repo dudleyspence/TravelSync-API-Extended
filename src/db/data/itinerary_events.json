@@ -3,7 +3,6 @@
     "id": 1,
     "itinerary_id": 1,
     "name": "Church of St. Blasius",
-    "desc": "Some description",
     "coords": "42.6462358,18.0802309",
     "place_id": "ChIJ81C_5MwKTBMRmYgRa72ASgU",
     "created_at": "2024-08-22T13:00:00"
@@ -12,7 +11,6 @@
     "id": 2,
     "itinerary_id": 1,
     "name": "Clock Tower of Dubrovnik",
-    "desc": "Some description",
     "coords": "42.64097140000001,18.110581",
     "place_id": "ChIJdTJ5BDMLTBMRgJv4Ds8LC6o",
     "created_at": "2024-08-22T13:05:00"
@@ -21,7 +19,6 @@
     "id": 3,
     "itinerary_id": 1,
     "name": "Church of St. Ignatius",
-    "desc": "Some description",
     "coords": "42.6395767,18.1091649",
     "place_id": "ChIJbfhlPzILTBMRlvhFJaB7X78",
     "created_at": "2024-08-22T13:10:00"
@@ -30,7 +27,6 @@
     "id": 4,
     "itinerary_id": 1,
     "name": "Order of Friars' Minor Capuchin Monastery - Lady of Mercy",
-    "desc": "Some description",
     "coords": "42.6455203,18.089034",
     "place_id": "ChIJ2-KTby0LTBMR6oteUdDClsw",
     "created_at": "2024-08-22T13:15:00"
@@ -39,7 +35,6 @@
     "id": 5,
     "itinerary_id": 2,
     "name": "Onofrio's Large Fountain",
-    "desc": "Some description",
     "coords": "42.64157,18.1073315",
     "place_id": "ChIJrRQV8Sl1TBMRQgJUuy8kapE",
     "created_at": "2024-08-22T13:20:00"
@@ -48,7 +43,6 @@
     "id": 6,
     "itinerary_id": 2,
     "name": "Nikola Mihanović Fountain",
-    "desc": "Some description",
     "coords": "42.6422191,18.1073161",
     "place_id": "ChIJt3_knzILTBMRp0ubMouCf_g",
     "created_at": "2024-08-22T13:25:00"
@@ -57,7 +51,6 @@
     "id": 7,
     "itinerary_id": 2,
     "name": "Gunduliceva Poljana Market",
-    "desc": "Some description",
     "coords": "42.64037899999999,18.1099393",
     "place_id": "ChIJIc8rUjILTBMR5n-7QIFkIk4",
     "created_at": "2024-08-22T13:30:00"
@@ -66,7 +59,6 @@
     "id": 8,
     "itinerary_id": 2,
     "name": "Dubrovnik Running Tours",
-    "desc": "Some description",
     "coords": "42.659222,18.07937",
     "place_id": "ChIJy8JBdTILTBMRnUoRue5MHd8",
     "created_at": "2024-08-22T13:35:00"
@@ -75,7 +67,6 @@
     "id": 9,
     "itinerary_id": 2,
     "name": "Archeological Museum",
-    "desc": "Some description",
     "coords": "42.6420958,18.1123681",
     "place_id": "ChIJiSJigjILTBMRbCumNH1vQaw",
     "created_at": "2024-08-22T13:40:00"
@@ -84,7 +75,6 @@
     "id": 10,
     "itinerary_id": 2,
     "name": "St. Blaise’s Church",
-    "desc": "Some description",
     "coords": "42.6408074,18.110286",
     "place_id": "ChIJh3rhADMLTBMRS4ifiDjqUOI",
     "created_at": "2024-08-22T13:45:00"
@@ -93,7 +83,6 @@
     "id": 11,
     "itinerary_id": 3,
     "name": "Plaça de Catalunya",
-    "desc": "Some description",
     "coords": "41.3870154,2.1700471",
     "place_id": "ChIJGUgrYPGipBIRS9ZgHK_C7B4",
     "created_at": "2024-08-22T14:00:00"
@@ -102,7 +91,6 @@
     "id": 12,
     "itinerary_id": 3,
     "name": "La Pedrera - Casa Milà",
-    "desc": "Some description",
     "coords": "41.3952155,2.1619024",
     "place_id": "ChIJ1eGKmZOipBIRah43T2Kjn8Q",
     "created_at": "2024-08-22T14:05:00"
@@ -111,7 +99,6 @@
     "id": 13,
     "itinerary_id": 3,
     "name": "Casa Batlló",
-    "desc": "Some description",
     "coords": "41.3917,2.164918",
     "place_id": "ChIJYUFLSe2ipBIRD04uni940kA",
     "created_at": "2024-08-22T14:10:00"
@@ -120,7 +107,6 @@
     "id": 14,
     "itinerary_id": 3,
     "name": "Capella d'en Marcús",
-    "desc": "Some description",
     "coords": "41.38583269999999,2.1799502",
     "place_id": "ChIJFf0mA_yipBIRmrj06fT0Zfc",
     "created_at": "2024-08-22T14:15:00"
@@ -129,7 +115,6 @@
     "id": 15,
     "itinerary_id": 3,
     "name": "Palau Güell",
-    "desc": "Some description",
     "coords": "41.3788851,2.1742398",
     "place_id": "ChIJ3fHTIFiipBIRpKXCn_E_oJY",
     "created_at": "2024-08-22T14:20:00"
@@ -138,7 +123,6 @@
     "id": 16,
     "itinerary_id": 4,
     "name": "Palau de la Música Catalana",
-    "desc": "Some description",
     "coords": "41.3875752,2.1753128",
     "place_id": "ChIJQQSrd_qipBIRQ2xzarVkqn8",
     "created_at": "2024-08-22T14:25:00"
@@ -147,7 +131,6 @@
     "id": 17,
     "itinerary_id": 4,
     "name": "Picasso Museum Barcelona",
-    "desc": "Some description",
     "coords": "41.3852706,2.1809472",
     "place_id": "ChIJa-K8mf6ipBIRY8wAB3EeASc",
     "created_at": "2024-08-22T14:30:00"
@@ -156,7 +139,6 @@
     "id": 18,
     "itinerary_id": 4,
     "name": "Cathedral of Barcelona",
-    "desc": "Some description",
     "coords": "41.383962,2.1761991",
     "place_id": "ChIJg2xxlvmipBIRg1jhdSQR9hY",
     "created_at": "2024-08-22T14:35:00"
@@ -165,7 +147,6 @@
     "id": 19,
     "itinerary_id": 4,
     "name": "Mercat de la Boqueria",
-    "desc": "Some description",
     "coords": "41.38173990000001,2.1715853",
     "place_id": "ChIJAVoetfeipBIR1a1z3FTGCoY",
     "created_at": "2024-08-22T14:40:00"
@@ -174,7 +155,6 @@
     "id": 20,
     "itinerary_id": 4,
     "name": "Basílica de Santa Maria del Mar",
-    "desc": "Some description",
     "coords": "41.3838871,2.1820711",
     "place_id": "ChIJV6QNXv6ipBIRYOHAH1yUvLQ",
     "created_at": "2024-08-22T14:45:00"
