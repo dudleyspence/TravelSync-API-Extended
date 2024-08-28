@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.orm import Session
+from sqlalchemy.orm.attributes import flag_modified
 from src.schemas import ItineraryCreate, ItineraryResponse, ItineraryEventCreate, ItineraryEventResponse, FileCreate, FileResponse, ItineraryUpdate
 from src.models import Itinerary, ItineraryEvent, File as FileModel
 from src.db.database import get_db
@@ -59,10 +60,15 @@ def add_itinerary_event(itinerary_id: int, event_data: ItineraryEventCreate, db:
     # update itinerary order
     if itinerary.itinerary_order:
         itinerary.itinerary_order.append(new_event.id)
+        print(itinerary.itinerary_order)
     else:
         itinerary.itinerary_order = [new_event.id]
+
+    flag_modified(itinerary, "itinerary_order")
+
     db.commit()
     db.refresh(itinerary)
+
 
     return itinerary
 
