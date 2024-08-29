@@ -158,5 +158,53 @@
     "coords": "41.3838871,2.1820711",
     "place_id": "ChIJV6QNXv6ipBIRYOHAH1yUvLQ",
     "created_at": "2024-08-22T14:45:00"
+  },
+  {
+    "id": 21,
+    "itinerary_id": 1,
+    "name": "Dubrovnik City Walls",
+    "coords": "42.6417468,18.1070031",
+    "place_id": "ChIJdRjMjQILTBNRKmJpUC9pA94",
+    "created_at": "2024-08-22T14:50:00"
+  },
+  {
+    "id": 22,
+    "itinerary_id": 1,
+    "name": "Fort Lovrijenac",
+    "coords": "42.6415022,18.1049091",
+    "place_id": "ChIJ91u_fzILTBNRoUSqHVn2SOM",
+    "created_at": "2024-08-22T14:55:00"
+  },
+  {
+    "id": 23,
+    "itinerary_id": 2,
+    "name": "Lokrum Island",
+    "coords": "42.6257593,18.1190917",
+    "place_id": "ChIJy9Ri5iQLTBMR8s9Uu6HTkC4",
+    "created_at": "2024-08-22T15:00:00"
+  },
+  {
+    "id": 24,
+    "itinerary_id": 2,
+    "name": "Rector's Palace",
+    "coords": "42.640239,18.110602",
+    "place_id": "ChIJD0XLSi4LTBMRnTTBdpUNw_c",
+    "created_at": "2024-08-22T15:05:00"
+  },
+  {
+    "id": 25,
+    "itinerary_id": 3,
+    "name": "Sagrada Família",
+    "coords": "41.4036299,2.1743558",
+    "place_id": "ChIJL6wn6oipBIRN2S5L1YLU93Q",
+    "created_at": "2024-08-22T15:10:00"
+  },
+  {
+    "id": 26,
+    "itinerary_id": 3,
+    "name": "Magic Fountain of Montjuïc",
+    "coords": "41.3703937,2.1518901",
+    "place_id": "ChIJufI35FyipBIRry3B-oevS0A",
+    "created_at": "2024-08-22T15:15:00"
   }
 ]
