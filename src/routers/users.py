@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from src.schemas import UserCreate, UserResponse, GroupResponse
+from src.schemas import UserCreate, UserLogin, UserResponse, GroupResponse
 from src.models import User, GroupMember
 from src.db.database import get_db
 import bcrypt
@@ -12,14 +12,17 @@ def hash_password(password: str) -> str:
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
     return hashed_password.decode('utf-8')
 
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
+
 router = APIRouter()
 
-@router.get('/{user_id}', response_model=UserResponse)
-def get_user(user_id: int, db: Session = Depends(get_db)) -> UserResponse:
-    db_user = db.query(User).filter(User.id == user_id).first()
-    if db_user is None:
-        raise HTTPException(status_code=404, detail="User not found")
-    return db_user  # SQLAlchemy model instance will be automatically converted to the Pydantic model
+@router.post('/user', response_model=UserResponse)
+def get_user(user: UserLogin, db: Session = Depends(get_db)) -> UserResponse:
+    db_user = db.query(User).filter(User.username == user.username).first()
+    if db_user is None or not verify_password(user.password, db_user.password):
+        raise HTTPException(status_code=404, detail="Invalid email or password")
+    return db_user
 
 @router.post('/', response_model=UserResponse)
 def post_user(user: UserCreate, db: Session = Depends(get_db)) -> UserResponse:
