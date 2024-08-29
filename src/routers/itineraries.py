@@ -46,12 +46,10 @@ def get_itinerary_events(itinerary_id: int, db: Session = Depends(get_db)) -> It
 
 @router.post('/{itinerary_id}/events', response_model=ItineraryResponse)
 def add_itinerary_event(itinerary_id: int, event_data: ItineraryEventCreate, db: Session = Depends(get_db)) -> ItineraryResponse:
-    # fetch the itinerary
     itinerary = db.query(Itinerary).filter(Itinerary.id == itinerary_id).first()
     if not itinerary:
         raise HTTPException(status_code=404, detail="Itinerary not found")
 
-    # create new itinerary event
     new_event = ItineraryEvent(**event_data.model_dump(), itinerary_id=itinerary_id)
     db.add(new_event)
     db.commit()  # to generate ID for event event
@@ -96,6 +94,8 @@ def reorder_itinerary_events(itinerary_id: int, itinerary_update: ItineraryUpdat
     db.commit()
     db.refresh(itinerary)
     return itinerary
+
+
 
 @router.get('/{itinerary_id}/files', response_model=List[FileResponse])
 def get_files(itinerary_id: int, db: Session = Depends(get_db)) -> List[FileResponse]:
