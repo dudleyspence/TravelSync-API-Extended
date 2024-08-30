@@ -1,22 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from src.schemas import UserCreate, UserLogin, UserResponse, GroupResponse
-from src.models import User, GroupMember
+from src.schemas import UserCreate, UserLogin, UserResponse, GroupItineraryResponse
+from src.models import User, GroupItineraryMember
 from src.db.database import get_db
-import bcrypt
 from typing import List
+from .utils import verify_password, hash_password
 
 
-def hash_password(password: str) -> str:
-    salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
-    return hashed_password.decode('utf-8')
-
-def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
 
 router = APIRouter()
 
+# login user
 @router.post('/user', response_model=UserResponse)
 def get_user(user: UserLogin, db: Session = Depends(get_db)) -> UserResponse:
     db_user = db.query(User).filter(User.username == user.username).first()
@@ -24,6 +18,8 @@ def get_user(user: UserLogin, db: Session = Depends(get_db)) -> UserResponse:
         raise HTTPException(status_code=404, detail="Invalid email or password")
     return db_user
 
+
+# add a new user
 @router.post('/', response_model=UserResponse)
 def post_user(user: UserCreate, db: Session = Depends(get_db)) -> UserResponse:
     db_user = db.query(User).filter(User.email == user.email).first()
@@ -43,15 +39,12 @@ def post_user(user: UserCreate, db: Session = Depends(get_db)) -> UserResponse:
     return new_user
 
 
-# gets all the groups for a given user
-@router.get('/{user_id}/groups', response_model=List[GroupResponse])
+# gets all group itineraries for a user
+@router.get('/{user_id}/group_itineraries', response_model=List[GroupItineraryResponse])
 def get_user_groups(user_id: int, db: Session = Depends(get_db)):
-    group_memberships = db.query(GroupMember).filter(GroupMember.user_id == user_id).all()
+    group_itinerary_memberships = db.query(GroupItineraryMember).filter(GroupItineraryMember.user_id == user_id).all()
     
-    if not group_memberships:
-        raise HTTPException(status_code=404, detail="User not found or no groups found")
+    if not group_itinerary_memberships:
+        raise HTTPException(status_code=404, detail="User not found or no group itineraries found")
 
-    # Extract groups from memberships
-    groups = [membership.group for membership in group_memberships]
-
-    return groups
+    return group_itineraries

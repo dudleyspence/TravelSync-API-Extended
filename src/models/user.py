@@ -12,6 +12,4 @@ class User(Base):
     password = Column(String(300), nullable=False)
     created_at = Column(DateTime, default=func.now())
 
-    group_members = relationship("GroupMember", back_populates="user", cascade="all, delete-orphan")
-
 

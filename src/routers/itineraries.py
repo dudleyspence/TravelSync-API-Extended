@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.attributes import flag_modified
-from src.schemas import ItineraryCreate, ItineraryResponse, ItineraryEventCreate, ItineraryEventResponse, FileCreate, FileResponse, ItineraryUpdate
-from src.models import Itinerary, ItineraryEvent, File as FileModel
+from src.schemas import GroupItineraryCreate, GroupItineraryResponse, ItineraryEventCreate, ItineraryEventResponse, FileCreate, FileResponse, GroupItineraryUpdate
+from src.models import GroupItinerary, ItineraryEvent, File as FileModel
 from src.db.database import get_db
 from typing import List
 import pyrebase
@@ -21,36 +21,39 @@ firebase_config = {
 firebase = pyrebase.initialize_app(firebase_config)
 storage = firebase.storage()
 
+
+
 router = APIRouter()
 
 
-
-@router.post('/', response_model=ItineraryResponse)
-def post_itinerary(itinerary: ItineraryCreate, db: Session = Depends(get_db)) -> ItineraryEventResponse:
-    new_itinerary = Itinerary(**itinerary.model_dump())
+# Create new group itinerary
+@router.post('/', response_model=GroupItineraryResponse)
+def create_group_itinerary(itinerary: GroupItineraryCreate, db: Session = Depends(get_db)) -> GroupItineraryResponse:
+    new_itinerary = GroupItinerary(**itinerary.model_dump())
     db.add(new_itinerary)
     db.commit()
     db.refresh(new_itinerary)
     return new_itinerary
 
 
-
-@router.get('/{itinerary_id}/events', response_model=List[ItineraryEventResponse])
-def get_itinerary_events(itinerary_id: int, db: Session = Depends(get_db)) -> ItineraryEventResponse:
-    db_itinerary_event = db.query(ItineraryEvent).filter(ItineraryEvent.itinerary_id == itinerary_id)
+# returns all the events currently in an itinerary
+@router.get('/{group_itinerary_id}/events', response_model=List[ItineraryEventResponse])
+def get_itinerary_events(group_itinerary_id: int, db: Session = Depends(get_db)) -> ItineraryEventResponse:
+    db_itinerary_event = db.query(ItineraryEvent).filter(ItineraryEvent.group_itinerary_id == group_itinerary_id)
     print(db_itinerary_event)
     if db_itinerary_event is None:
         raise HTTPException(status_code=404, detail="Itinerary event not found")
     return db_itinerary_event 
 
 
-@router.post('/{itinerary_id}/events', response_model=ItineraryResponse)
-def add_itinerary_event(itinerary_id: int, event_data: ItineraryEventCreate, db: Session = Depends(get_db)) -> ItineraryResponse:
-    itinerary = db.query(Itinerary).filter(Itinerary.id == itinerary_id).first()
+# Add a new event to the itinerary
+@router.post('/{group_itinerary_id}/events', response_model=GroupItineraryResponse)
+def add_itinerary_event(group_itinerary_id: int, event_data: ItineraryEventCreate, db: Session = Depends(get_db)) -> GroupItineraryResponse:
+    itinerary = db.query(GroupItinerary).filter(GroupItinerary.id == group_itinerary_id).first()
     if not itinerary:
         raise HTTPException(status_code=404, detail="Itinerary not found")
 
-    new_event = ItineraryEvent(**event_data.model_dump(), itinerary_id=itinerary_id)
+    new_event = ItineraryEvent(**event_data.model_dump(), group_itinerary_id=group_itinerary_id)
     db.add(new_event)
     db.commit()  # to generate ID for event event
     db.refresh(new_event)

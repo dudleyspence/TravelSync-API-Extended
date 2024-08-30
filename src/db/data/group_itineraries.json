@@ -4,6 +4,7 @@
     "title": "Trip to Dubrovnik",
     "group_id": 1,
     "created_at": "2024-08-22T12:00:00",
+    "join_code": "A1B2C3",
     "itinerary_order": [1, 2, 3, 4]
   },
   {
@@ -11,20 +12,23 @@
     "title": "Trip to Historical Sites",
     "group_id": 2,
     "created_at": "2024-08-22T12:05:00",
-    "itinerary_order": [5, 6, 7, 8, 9, 10]
+    "itinerary_order": [5, 6, 7, 8, 9, 10],
+    "join_code": "D4E5F6"
   },
   {
     "id": 3,
     "title": "Trip to Barcelona",
     "group_id": 3,
     "created_at": "2024-08-22T12:10:00",
-    "itinerary_order": [11, 12, 13, 14, 15]
+    "itinerary_order": [11, 12, 13, 14, 15],
+    "join_code": "G7H8I9"
   },
   {
     "id": 4,
     "title": "Barcelona Holiday",
     "group_id": 4,
     "created_at": "2024-08-22T12:15:00",
-    "itinerary_order": [16, 17, 18, 19, 20]
+    "itinerary_order": [16, 17, 18, 19, 20],
+    "join_code": "J0K1L2"
   }
 ]
