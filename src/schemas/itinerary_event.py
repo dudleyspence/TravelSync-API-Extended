@@ -10,7 +10,7 @@ class ItineraryEventCreate(ItineraryEventBase):
     pass
 
 class ItineraryEventResponse(ItineraryEventBase):
-    itinerary_id: int  # Updated field name
+    itinerary_id: int 
     id: int
     created_at: datetime
 

@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 class ItineraryMemberBase(BaseModel):
     user_id: int
-    itinerary_id: int  # Updated field name
+    itinerary_id: int  
 
 class ItineraryMemberCreate(BaseModel):
     user_id: int

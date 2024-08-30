@@ -4,7 +4,6 @@ from typing import List, Optional
 
 class ItineraryBase(BaseModel):
     name: str
-    itinerary_id: int  # Updated field name
     itinerary_order: Optional[List[int]] = []
 
 class ItineraryCreate(ItineraryBase):
