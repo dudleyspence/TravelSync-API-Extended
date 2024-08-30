@@ -7,7 +7,7 @@ class ItineraryEvent(Base):
     __tablename__ = 'itinerary_events'
 
     id = Column(Integer, primary_key=True, index=True)
-    group_itinerary_id = Column(Integer, ForeignKey('group_itineraries.id', ondelete='CASCADE'), nullable=False)
+    itinerary_id = Column(Integer, ForeignKey('itineraries.id', ondelete='CASCADE'), nullable=False)
     name = Column(String(200), nullable=False)
     coords = Column(String(400), nullable=False)
     place_id = Column(String(400), nullable=False)

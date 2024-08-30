@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from .database import engine, Base, SessionLocal
-from src.models import User, Group, Itinerary, GroupMember, ItineraryEvent
+from src.models import User, Itinerary, ItineraryMember, ItineraryEvent
 import json
 import pymysql
 import os
@@ -34,11 +34,8 @@ def seed_data(db: Session):
     with open('src/db/data/users.json') as file:
         users = json.load(file)
 
-    with open('src/db/data/groups.json') as file:
-        groups = json.load(file)
-
-    with open('src/db/data/group_members.json') as file:
-        group_members = json.load(file)
+    with open('src/db/data/itinerary_members.json') as file:
+        itinerary_members = json.load(file)
 
     with open('src/db/data/itineraries.json') as file:
         itineraries = json.load(file)
@@ -50,17 +47,13 @@ def seed_data(db: Session):
     for user in users:
         db.add(User(**user))
     db.commit()
-
-    for group in groups:
-        db.add(Group(**group))
-    db.commit()
-
-    for group_member in group_members:
-        db.add(GroupMember(**group_member))
-    db.commit()
-
+    
     for itinerary in itineraries:
         db.add(Itinerary(**itinerary))
+    db.commit()
+
+    for itinerary_member in itinerary_members:
+        db.add(ItineraryMember(**itinerary_member))
     db.commit()
 
     for itinerary_event in itinerary_events:

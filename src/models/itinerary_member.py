@@ -3,12 +3,12 @@ from sqlalchemy.orm import relationship
 from src.db import Base
 
 
-class GroupItineraryMember(Base):
-    __tablename__ = 'group_itinerary_members'
+class ItineraryMember(Base):
+    __tablename__ = 'itinerary_members'
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
-    group_itinerary_id = Column(Integer, ForeignKey('group_itineraries.id', ondelete='CASCADE'), nullable=False)
+    itinerary_id = Column(Integer, ForeignKey('itineraries.id', ondelete='CASCADE'), nullable=False)
 
 
 

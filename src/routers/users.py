@@ -1,12 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from src.schemas import UserCreate, UserLogin, UserResponse, GroupItineraryResponse
-from src.models import User, GroupItineraryMember
+from src.schemas import UserCreate, UserLogin, UserResponse, ItineraryResponse 
+from src.models import User, ItineraryMember  
 from src.db.database import get_db
 from typing import List
 from .utils import verify_password, hash_password
-
-
 
 router = APIRouter()
 
@@ -17,7 +15,6 @@ def get_user(user: UserLogin, db: Session = Depends(get_db)) -> UserResponse:
     if db_user is None or not verify_password(user.password, db_user.password):
         raise HTTPException(status_code=404, detail="Invalid email or password")
     return db_user
-
 
 # add a new user
 @router.post('/', response_model=UserResponse)
@@ -38,13 +35,12 @@ def post_user(user: UserCreate, db: Session = Depends(get_db)) -> UserResponse:
 
     return new_user
 
-
-# gets all group itineraries for a user
-@router.get('/{user_id}/group_itineraries', response_model=List[GroupItineraryResponse])
-def get_user_groups(user_id: int, db: Session = Depends(get_db)):
-    group_itinerary_memberships = db.query(GroupItineraryMember).filter(GroupItineraryMember.user_id == user_id).all()
+# gets all itineraries for a user
+@router.get('/{user_id}/itineraries', response_model=List[ItineraryResponse])  # Updated route and response_model
+def get_user_itineraries(user_id: int, db: Session = Depends(get_db)):
+    itinerary_memberships = db.query(ItineraryMember).filter(ItineraryMember.user_id == user_id).all()  # Updated query
     
-    if not group_itinerary_memberships:
-        raise HTTPException(status_code=404, detail="User not found or no group itineraries found")
+    if not itinerary_memberships:
+        raise HTTPException(status_code=404, detail="User not found or no itineraries found")
 
-    return group_itineraries
+    return itinerary_memberships  

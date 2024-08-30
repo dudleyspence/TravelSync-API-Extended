@@ -5,12 +5,12 @@ class ItineraryEventBase(BaseModel):
     name: str
     coords: str
     place_id: str
-    
+
 class ItineraryEventCreate(ItineraryEventBase):
     pass
 
 class ItineraryEventResponse(ItineraryEventBase):
-    group_itinerary_id: int
+    itinerary_id: int  # Updated field name
     id: int
     created_at: datetime
 

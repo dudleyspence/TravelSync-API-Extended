@@ -2,8 +2,8 @@ from sqlalchemy import JSON, Column, Integer, String, DateTime, func, ForeignKey
 from src.db import Base
 
 
-class GroupItinerary(Base):
-    __tablename__ = 'group_itineraries'
+class Itinerary(Base):
+    __tablename__ = 'itineraries'
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(200))
