@@ -11,7 +11,7 @@ router = APIRouter()
 
 
 # Create new itinerary
-@router.post('/', response_model=ItineraryResponse)
+@router.post('', response_model=ItineraryResponse)
 def create_itinerary(itinerary: ItineraryCreate, db: Session = Depends(get_db)) -> ItineraryResponse:
     join_code = generate_join_code()
 
