@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from src.routers import itinerary_members, users, groups, itineraries, itinerary_events, google_places
+from src.routers import itinerary_members, users, itineraries, itinerary_events, google_places
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.models import Base  
@@ -21,8 +21,7 @@ app.add_middleware(
 
 # using tags on routers is just to improve the /docs page accuracy
 app.include_router(users.router, prefix="/api/users", tags=["users"])
-app.include_router(groups.router, prefix="/api/groups", tags=["groups"])
-app.include_router(itinerary_members.router, prefix="/api/group_members", tags=["group_members"])
+app.include_router(itinerary_members.router, prefix="/api/itinerary_members", tags=["itinerary_members"])
 app.include_router(itineraries.router, prefix="/api/itineraries", tags=["itineraries"])
 app.include_router(itinerary_events.router, prefix="/api/itinerary-events", tags=["itinerary events"])
 app.include_router(google_places.router, prefix="/api/places", tags=["google places"])
