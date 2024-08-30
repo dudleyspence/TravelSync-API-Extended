@@ -4,7 +4,6 @@ from typing import List, Optional
 
 class ItineraryBase(BaseModel):
     name: str
-    itinerary_order: Optional[List[int]] = []
 
 class ItineraryCreate(ItineraryBase):
     pass
@@ -15,6 +14,7 @@ class ItineraryUpdate(BaseModel):
 class ItineraryResponse(ItineraryBase):
     id: int
     join_code: str
+    itinerary_order: List[int]
     created_at: datetime
 
     class Config:
