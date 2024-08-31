@@ -67,11 +67,12 @@ def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = D
 
             # Create a new file record in the database
             new_file = FileModel(
-                associated_id=itinerary_id,  
-                filename=file.filename,
+                id=itinerary_id,  
+                file_name=file.filename,
                 file_type=file_type,
                 file_url=file_url
             )
+
 
             # Add and commit the new file record to the database
             db.add(new_file)
