@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 
 from src.models import File as FileModel  
 from src.db.database import get_db
+from typing import List
+
 
 import uuid
 import mimetypes
@@ -48,6 +50,7 @@ router = APIRouter()
 
 @router.post('/upload/{itinerary_id}', response_model=FileResponse)
 def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = Depends(get_db))-> FileResponse:
+    # used a try as an error during file upload isnt unlikely
     try:    
             print(file)
             # unique ID for the file
@@ -84,6 +87,18 @@ def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = D
     except Exception as e:
         print(f"Error uploading file: {e}")
         raise HTTPException(status_code=500, detail="Failed to upload file")
+
+
+
+@router.get('/{itinerary_id}', response_model=List[FileResponse])
+def get_itinerary_files(itinerary_id: int, db: Session = Depends(get_db)) -> List[FileResponse]:
+    files = db.query(FileModel).filter(FileModel.itinerary_id == itinerary_id).all()
+    print(files)
+    
+    if not files:
+        raise HTTPException(status_code=404, detail="No files found for this itinerary.")
+    
+    return files
 
 
 
