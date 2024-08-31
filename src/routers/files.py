@@ -39,7 +39,7 @@ firebase_cred_info = {
 cred = credentials.Certificate(firebase_cred_info)
 firebase_admin.initialize_app(cred)
 
-bucket = storage.bucket()
+bucket = storage.bucket("travelsync-extended.appspot.com")
 
 
 router = APIRouter()
