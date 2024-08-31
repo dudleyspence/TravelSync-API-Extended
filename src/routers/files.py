@@ -48,8 +48,8 @@ bucket = storage.bucket()
 
 router = APIRouter()
 
-@router.post('/upload/{itinerary_id}', response_model=FileResponse)
-def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = Depends(get_db))-> FileResponse:
+@router.post('/upload/{itinerary_id}/join_code', response_model=FileResponse)
+def upload_file(itinerary_id: int, join_code: str, file: UploadFile = File(...), db: Session = Depends(get_db))-> FileResponse:
     # used a try as an error during file upload isnt unlikely
     try:    
             print(file)
@@ -70,7 +70,8 @@ def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = D
 
             # Create a new file record in the database
             new_file = FileModel(
-                itinerary_id=itinerary_id,  
+                itinerary_id=itinerary_id, 
+                join_code=join_code, 
                 file_name=file.filename,
                 file_type=file_type,
                 file_path=file_url
@@ -90,9 +91,9 @@ def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = D
 
 
 
-@router.get('/{itinerary_id}', response_model=List[FileResponse])
+@router.get('/{itinerary_id}/{join_code}', response_model=List[FileResponse])
 def get_itinerary_files(itinerary_id: int, db: Session = Depends(get_db)) -> List[FileResponse]:
-    print(f"Received itinerary_id: {itinerary_id} (Type: {type(itinerary_id)})")  # Debugging log
+    print(f"Received itinerary_id: {itinerary_id} (Type: {type(itinerary_id)})")  
     files = db.query(FileModel).filter(FileModel.itinerary_id == itinerary_id).all()
     print(files)
     

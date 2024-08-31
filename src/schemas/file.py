@@ -3,6 +3,7 @@ from pydantic import BaseModel
 class FileBase(BaseModel):
     file_name: str
     itinerary_id: int
+    join_code: str
     file_type: str = None  
     file_path: str
 
