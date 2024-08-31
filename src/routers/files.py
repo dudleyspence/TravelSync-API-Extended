@@ -33,13 +33,15 @@ firebase_cred_info = {
 }
 
 
-
+firebase_bucket_name = os.getenv("firebase_storage_bucket")
 
 
 cred = credentials.Certificate(firebase_cred_info)
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cred, {
+    'storageBucket': firebase_bucket_name
+})
 
-bucket = storage.bucket("travelsync-extended.appspot.com")
+bucket = storage.bucket()
 
 
 router = APIRouter()
