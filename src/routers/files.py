@@ -48,7 +48,8 @@ router = APIRouter()
 
 @router.post('/upload/{itinerary_id}', response_model=FileResponse)
 def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = Depends(get_db))-> FileResponse:
-    try:
+    try:    
+            print(file)
             # unique ID for the file
             file_id = str(uuid.uuid4())
 
