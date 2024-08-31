@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from src.routers import itinerary_members, users, itineraries, itinerary_events, google_places
+from src.routers import itinerary_members, users, itineraries, itinerary_events, google_places, files
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.models import Base  
@@ -25,6 +25,7 @@ app.include_router(itinerary_members.router, prefix="/api/itinerary_members", ta
 app.include_router(itineraries.router, prefix="/api/itineraries", tags=["itineraries"])
 app.include_router(itinerary_events.router, prefix="/api/itinerary-events", tags=["itinerary events"])
 app.include_router(google_places.router, prefix="/api/places", tags=["google places"])
+app.include_router(files.router, prefix="/api/files", tags=["file storage"])
 
 
 @app.get("/")

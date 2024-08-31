@@ -6,9 +6,6 @@ router = APIRouter()
 @router.post('/info')
 async def get_place_info(address):
 
-    # data = await request.json()  # Extract JSON data from the request body
-    # address = data.get("address")
-    
     if not address:
         raise HTTPException(status_code=422, detail="Address field is required")
 

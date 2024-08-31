@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from src.schemas import ItineraryMemberCreate, ItineraryMemberResponse, UserResponse, JoinItineraryRequest  # Updated imports
+from src.schemas import ItineraryMemberCreate, ItineraryMemberResponse, UserResponse, JoinItineraryRequest  
 from src.models import ItineraryMember, Itinerary, User  # Updated imports
 from src.db.database import get_db
 from typing import List
@@ -39,7 +39,7 @@ def join_itinerary(request: JoinItineraryRequest, db: Session = Depends(get_db))
 
     # Add user to the itinerary
     new_itinerary_member = ItineraryMember(user_id=request.user_id, itinerary_id=itinerary.id)
-    
+
     db.add(new_itinerary_member)
     db.commit()
     db.refresh(new_itinerary_member)
