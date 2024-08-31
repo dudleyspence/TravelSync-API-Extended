@@ -92,6 +92,7 @@ def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = D
 
 @router.get('/{itinerary_id}', response_model=List[FileResponse])
 def get_itinerary_files(itinerary_id: int, db: Session = Depends(get_db)) -> List[FileResponse]:
+    print(f"Received itinerary_id: {itinerary_id} (Type: {type(itinerary_id)})")  # Debugging log
     files = db.query(FileModel).filter(FileModel.itinerary_id == itinerary_id).all()
     print(files)
     
