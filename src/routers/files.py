@@ -67,7 +67,7 @@ def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = D
 
             # Create a new file record in the database
             new_file = FileModel(
-                id=itinerary_id,  
+                itinerary_id=itinerary_id,  
                 file_name=file.filename,
                 file_type=file_type,
                 file_path=file_url
