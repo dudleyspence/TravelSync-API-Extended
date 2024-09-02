@@ -21,5 +21,5 @@ class ItineraryResponse(ItineraryBase):
         orm_mode = True
 
 class JoinItineraryRequest(BaseModel):
-    user_id: int
+    user_id: str
     join_code: str
