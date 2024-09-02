@@ -7,7 +7,7 @@ class ItineraryMember(Base):
     __tablename__ = 'itinerary_members'
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(String, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    user_id = Column(String(600), ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     itinerary_id = Column(Integer, ForeignKey('itineraries.id', ondelete='CASCADE'), nullable=False)
 
 
