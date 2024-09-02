@@ -8,13 +8,13 @@ from .utils import verify_password, hash_password
 
 router = APIRouter()
 
-# login user
-@router.post('/user', response_model=UserResponse)
-def get_user_for_login(user: UserLogin, db: Session = Depends(get_db)) -> UserResponse:
-    db_user = db.query(User).filter(User.username == user.username).first()
-    if db_user is None or not verify_password(user.password, db_user.password):
-        raise HTTPException(status_code=404, detail="Invalid email or password")
-    return db_user
+# # login user
+# @router.post('/user', response_model=UserResponse)
+# def get_user_for_login(user: UserLogin, db: Session = Depends(get_db)) -> UserResponse:
+#     db_user = db.query(User).filter(User.username == user.username).first()
+#     if db_user is None or not verify_password(user.password, db_user.password):
+#         raise HTTPException(status_code=404, detail="Invalid email or password")
+#     return db_user
 
 # add a new user
 @router.post('/', response_model=UserResponse)
@@ -24,9 +24,9 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)) -> UserResponse
         raise HTTPException(status_code=400, detail="Email already in use")
 
     new_user = User(
+        id: user.id
         email=user.email,
         username=user.username,
-        password=hash_password(user.password)
     )
 
     db.add(new_user)

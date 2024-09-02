@@ -89,17 +89,12 @@ def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = D
         raise HTTPException(status_code=500, detail="Failed to upload file")
 
 
-
+# Get all files for an itinerary
 @router.get('/{itinerary_id}', response_model=List[FileResponse])
 def get_itinerary_files(itinerary_id: int, db: Session = Depends(get_db)) -> List[FileResponse]:
-    print(f"Received itinerary_id: {itinerary_id} (Type: {type(itinerary_id)})")  
-    files = db.query(FileModel).filter(FileModel.itinerary_id == itinerary_id).all()
-    print(files)
-    
-    if not files:
-        raise HTTPException(status_code=404, detail="No files found for this itinerary.")
-    
+    files = db.query(FileModel).filter(FileModel.itinerary_id == itinerary_id).all()    
     return files
+
 
 
 
