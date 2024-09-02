@@ -33,8 +33,6 @@ def create_itinerary(itinerary: ItineraryCreate, db: Session = Depends(get_db)) 
 @router.get('/{itinerary_id}/events', response_model=List[ItineraryEventResponse])
 def get_itinerary_events(itinerary_id: int, db: Session = Depends(get_db)) -> List[ItineraryEventResponse]:
     db_itinerary_events = db.query(ItineraryEvent).filter(ItineraryEvent.itinerary_id == itinerary_id).all()
-    if not db_itinerary_events:
-        raise HTTPException(status_code=404, detail="Itinerary events not found")
     return db_itinerary_events
 
 

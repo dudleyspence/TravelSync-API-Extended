@@ -120,46 +120,6 @@
     "created_at": "2024-08-22T14:20:00"
   },
   {
-    "id": 16,
-    "itinerary_id": 4,
-    "name": "Palau de la Música Catalana",
-    "coords": "41.3875752,2.1753128",
-    "place_id": "ChIJQQSrd_qipBIRQ2xzarVkqn8",
-    "created_at": "2024-08-22T14:25:00"
-  },
-  {
-    "id": 17,
-    "itinerary_id": 4,
-    "name": "Picasso Museum Barcelona",
-    "coords": "41.3852706,2.1809472",
-    "place_id": "ChIJa-K8mf6ipBIRY8wAB3EeASc",
-    "created_at": "2024-08-22T14:30:00"
-  },
-  {
-    "id": 18,
-    "itinerary_id": 4,
-    "name": "Cathedral of Barcelona",
-    "coords": "41.383962,2.1761991",
-    "place_id": "ChIJg2xxlvmipBIRg1jhdSQR9hY",
-    "created_at": "2024-08-22T14:35:00"
-  },
-  {
-    "id": 19,
-    "itinerary_id": 4,
-    "name": "Mercat de la Boqueria",
-    "coords": "41.38173990000001,2.1715853",
-    "place_id": "ChIJAVoetfeipBIR1a1z3FTGCoY",
-    "created_at": "2024-08-22T14:40:00"
-  },
-  {
-    "id": 20,
-    "itinerary_id": 4,
-    "name": "Basílica de Santa Maria del Mar",
-    "coords": "41.3838871,2.1820711",
-    "place_id": "ChIJV6QNXv6ipBIRYOHAH1yUvLQ",
-    "created_at": "2024-08-22T14:45:00"
-  },
-  {
     "id": 21,
     "itinerary_id": 1,
     "name": "Dubrovnik City Walls",
