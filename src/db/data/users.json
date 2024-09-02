@@ -1,16 +1,14 @@
 [
-  [
-    {
-      "id": "uPfbGKlVTGTMApk1eKIr4WYPOdh2",
-      "name": "Hiring Manager",
-      "email": "demo@example.com",
-      "created_at": "2024-08-22T10:00:00"
-    },
-    {
-      "id": "BWpMeIdDrqfF06Keg90aCVvBut82",
-      "name": "jane doe",
-      "email": "jane@example.com",
-      "created_at": "2024-08-22T10:05:00"
-    }
-  ]
+  {
+    "id": "uPfbGKlVTGTMApk1eKIr4WYPOdh2",
+    "name": "Hiring Manager",
+    "email": "demo@example.com",
+    "created_at": "2024-08-22T10:00:00"
+  },
+  {
+    "id": "BWpMeIdDrqfF06Keg90aCVvBut82",
+    "name": "jane doe",
+    "email": "jane@example.com",
+    "created_at": "2024-08-22T10:05:00"
+  }
 ]
