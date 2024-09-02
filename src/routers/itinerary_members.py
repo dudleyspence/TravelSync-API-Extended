@@ -19,6 +19,7 @@ def get_users_in_itinerary(itinerary_id: int, db: Session = Depends(get_db)):
 @router.post('/join', response_model=ItineraryMemberResponse)
 def join_itinerary(request: JoinItineraryRequest, db: Session = Depends(get_db)) -> ItineraryMemberResponse:
 
+    print(request)
     itinerary = db.query(Itinerary).filter(Itinerary.join_code == request.join_code).first()
     if not itinerary:
         raise HTTPException(status_code=404, detail="Invalid join code")
