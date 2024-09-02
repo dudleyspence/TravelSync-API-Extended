@@ -8,13 +8,6 @@ from .utils import verify_password, hash_password
 
 router = APIRouter()
 
-# # login user
-# @router.post('/user', response_model=UserResponse)
-# def get_user_for_login(user: UserLogin, db: Session = Depends(get_db)) -> UserResponse:
-#     db_user = db.query(User).filter(User.username == user.username).first()
-#     if db_user is None or not verify_password(user.password, db_user.password):
-#         raise HTTPException(status_code=404, detail="Invalid email or password")
-#     return db_user
 
 # add a new user
 @router.post('/', response_model=UserResponse)
@@ -46,3 +39,14 @@ def get_user_itineraries(user_id: str, db: Session = Depends(get_db)):
     itineraries = db.query(Itinerary).filter(Itinerary.id.in_(itinerary_ids)).all()
 
     return itineraries  
+
+
+# get all details for one user 
+@router.get('/{user_id}', response_model=UserResponse)  
+def get_user(user_id: str, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.user_id == user_id).first()
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found in database")
+
+    return user  
