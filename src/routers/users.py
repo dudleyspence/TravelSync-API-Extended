@@ -37,7 +37,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)) -> UserResponse
 
 # gets all itineraries for a user
 @router.get('/{user_id}/itineraries', response_model=List[ItineraryResponse])  
-def get_user_itineraries(user_id: int, db: Session = Depends(get_db)):
+def get_user_itineraries(user_id: str, db: Session = Depends(get_db)):
     itinerary_memberships = db.query(ItineraryMember).filter(ItineraryMember.user_id == user_id).all()
 
     #  making a loop that extracts into a list the itinerary_ids for all the itineraries this user is a member of
