@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from src.schemas import UserResponse, ItineraryResponse 
+from src.schemas import UserCreate, UserResponse, ItineraryResponse 
 from src.models import User, ItineraryMember, Itinerary
 from src.db.database import get_db
 from typing import List
@@ -18,7 +18,7 @@ router = APIRouter()
 
 # add a new user
 @router.post('/', response_model=UserResponse)
-def create_user(user: User, db: Session = Depends(get_db)) -> UserResponse:
+def create_user(user: UserCreate, db: Session = Depends(get_db)) -> UserResponse:
     db_user = db.query(User).filter(User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="Email already in use")
@@ -26,7 +26,7 @@ def create_user(user: User, db: Session = Depends(get_db)) -> UserResponse:
     new_user = User(
         id=user.id,
         email=user.email,
-        username=user.username,
+        name=user.name,
     )
 
     db.add(new_user)
