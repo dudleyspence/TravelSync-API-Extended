@@ -94,7 +94,7 @@ def get_itinerary_files(itinerary_id: int, db: Session = Depends(get_db)) -> Lis
 
 @router.delete('/{file_id}', status_code=status.HTTP_204_NO_CONTENT)
 def remove_itinerary_file(file_id: int, db: Session = Depends(get_db)):
-    file_to_delete = db.query(FileModel).filter(FileModel.file_id == file_id).first()
+    file_to_delete = db.query(FileModel).filter(FileModel.id == file_id).first()
     
     if file_to_delete is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="File not found")
