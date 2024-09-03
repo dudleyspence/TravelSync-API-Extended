@@ -112,13 +112,14 @@ def remove_itinerary_file(file_id: int, db: Session = Depends(get_db)):
 @router.get('/download/{file_id}', response_class=Response)
 def download_file(file_id: int, db: Session = Depends(get_db)):
     
-    file_record = db.query(FileModel).filter(FileModel.file_id == file_id).first()
+    file_record = db.query(FileModel).filter(FileModel.id == file_id).first()
     
     if file_record is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="File not found")
 
     try:
         file_path = file_record.file_path
+        
 
         blob = bucket.blob(file_path)
 
