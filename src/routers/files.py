@@ -108,6 +108,8 @@ def remove_itinerary_file(file_id: int, db: Session = Depends(get_db)):
         blob.delete() 
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Failed to delete file from storage")
+    db.delete(file_to_delete)
+    db.commit()
     
 
      
