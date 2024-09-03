@@ -101,6 +101,8 @@ def remove_itinerary_file(file_id: int, db: Session = Depends(get_db)):
 
     try:
         # the .replace just removes our baseURL/bucketname from the full path to only give the relative path
+        print(f"Full file path: {file_to_delete.file_path}")
+        print(f"Bucket name: {bucket.name}")
         file_path = file_to_delete.file_path.replace(f"https://storage.googleapis.com/{bucket.name}/", "")
         blob = bucket.blob(file_path)
         blob.delete() 
