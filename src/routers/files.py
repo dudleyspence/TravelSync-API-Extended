@@ -92,7 +92,7 @@ def get_itinerary_files(itinerary_id: int, db: Session = Depends(get_db)) -> Lis
 
 
 
-@router.delete('{file_id}', status_code=status.HTTP_204_NO_CONTENT)
+@router.delete('/{file_id}', status_code=status.HTTP_204_NO_CONTENT)
 def remove_itinerary_file(file_id: int, db: Session = Depends(get_db)):
     file_to_delete = db.query(FileModel).filter(FileModel.file_id == file_id).first()
     
