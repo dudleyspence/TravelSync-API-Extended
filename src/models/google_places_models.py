@@ -115,7 +115,7 @@ async def fetch_place_detail(place_id):
   params = {
    "place_id": place_id,
    "language": "en",
-   "fields": "formatted_address,name,geometry,place_id,rating,reviews,website,formatted_phone_number,opening_hours,opening_hours,editorial_summary,photos,types",
+   "fields": "formatted_address,name,geometry,place_id,rating,reviews,website,formatted_phone_number,opening_hours,opening_hours,editorial_summary,user_ratings_total,photos,types",
    "key": api_key,
   }
   
