@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status, Response
 import os
 from sqlalchemy.orm import Session
 from src.schemas import FileResponse
@@ -57,21 +57,19 @@ def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = D
 
             file_type = mimetypes.guess_type(file.filename)[0] or 'application/octet-stream'
 
-            blob = bucket.blob(f"{file_id}/{file.filename}")
+            relative_file_path = f"{file_id}/{file.filename}"  # Relative path
+            blob = bucket.blob(relative_file_path)
 
-            # Upload the file to Storage
+            # Upload the file to Firebase Storage
             blob.upload_from_file(file.file, content_type=file.content_type)
 
-            # construct file URL
-            file_url = f"https://storage.googleapis.com/{bucket.name}/{file_id}/{file.filename}"
-
-            # create new file in database
+        
             new_file = FileModel(
                 itinerary_id=itinerary_id,  
                 file_name=file.filename,
                 file_type=file_type,
-                file_path=file_url
-            )
+                file_path=relative_file_path  # Store the relative path
+        )
 
             db.add(new_file)
             db.commit()
@@ -100,10 +98,7 @@ def remove_itinerary_file(file_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="File not found")
 
     try:
-        # the .replace just removes our baseURL/bucketname from the full path to only give the relative path
-        print(f"Full file path: {file_to_delete.file_path}")
-        print(f"Bucket name: {bucket.name}")
-        file_path = file_to_delete.file_path.replace(f"https://storage.googleapis.com/{bucket.name}/", "")
+        file_path = file_to_delete.file_path
         blob = bucket.blob(file_path)
         blob.delete() 
     except Exception as e:
@@ -112,6 +107,28 @@ def remove_itinerary_file(file_id: int, db: Session = Depends(get_db)):
     db.commit()
     
 
+@router.get('/download/{file_id}', response_class=Response)
+def download_file(file_id: int, db: Session = Depends(get_db)):
+    
+    file_record = db.query(FileModel).filter(FileModel.file_id == file_id).first()
+    
+    if file_record is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="File not found")
+
+    try:
+        file_path = file_record.file_path
+
+        blob = bucket.blob(file_path)
+
+        #  signed URL for the file to allow temporary access
+        signed_url = blob.generate_signed_url(
+            expiration=timedelta(minutes=15),  # URL is valid for 15 minutes
+            method='GET'
+        )
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Failed to generate download link")
+
+    return {"url": signed_url}
      
 
 # @router.delete('/delete_all/{itinerary_id}')
