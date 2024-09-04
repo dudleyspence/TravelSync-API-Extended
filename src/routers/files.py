@@ -60,10 +60,10 @@ def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = D
 
             file_type = mimetypes.guess_type(file.filename)[0] or 'application/octet-stream'
 
-            relative_file_path = f"{file_id}/{file.filename}"  # Relative path
+            relative_file_path = f"{file_id}/{file.filename}"  # Relative path (firebase doesnt like the full path)
             blob = bucket.blob(relative_file_path)
 
-            # Upload the file to Firebase Storage
+            # upload the file to Firebase Storage
             blob.upload_from_file(file.file, content_type=file.content_type)
 
         
@@ -71,7 +71,7 @@ def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = D
                 itinerary_id=itinerary_id,  
                 file_name=file.filename,
                 file_type=file_type,
-                file_path=relative_file_path  # Store the relative path
+                file_path=relative_file_path  # store relative path
         )
 
             db.add(new_file)
@@ -80,8 +80,8 @@ def upload_file(itinerary_id: int, file: UploadFile = File(...), db: Session = D
 
             return new_file
 
-    except Exception as e:
-        print(f"Error uploading file: {e}")
+    except Exception as error:
+        print(error)
         raise HTTPException(status_code=500, detail="Failed to upload file")
 
 
@@ -104,7 +104,7 @@ def remove_itinerary_file(file_id: int, db: Session = Depends(get_db)):
         file_path = file_to_delete.file_path
         blob = bucket.blob(file_path)
         blob.delete() 
-    except Exception as e:
+    except Exception as error:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Failed to delete file from storage")
     db.delete(file_to_delete)
     db.commit()
@@ -129,15 +129,8 @@ def download_file(file_id: int, db: Session = Depends(get_db)):
             expiration=timedelta(minutes=15),  # URL is valid for 15 minutes
             method='GET'
         )
-    except Exception as e:
+    except Exception as error:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Failed to generate download link")
 
     return JSONResponse(content={"url": signed_url})
      
-
-# @router.delete('/delete_all/{itinerary_id}')
-# def delete_all_files(itinerary_id: int):
-#     blobs = bucket.list_blobs(prefix=f"{itinerary_id}/")
-#     for blob in blobs:
-#         blob.delete()
-#     return {"message": "All files deleted successfully!"}
