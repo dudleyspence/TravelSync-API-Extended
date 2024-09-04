@@ -1,6 +1,6 @@
 This project began as an Agile group for 4 taking part in a project phase. Once this phase ended I decided to independantly continue with the project.
 
-This original group repository can be found here https://github.com/dudleyspence/TravelSync-FE-Group
+This original group repository can be found here [https://github.com/dudleyspence/TravelSync-FE-Group](https://github.com/dudleyspence/TravelSync-API-Group.git)
 
 # TravelSync API
 
