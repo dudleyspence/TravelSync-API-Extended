@@ -3,6 +3,7 @@ import os
 from sqlalchemy.orm import Session
 from src.schemas import FileResponse
 from datetime import timedelta
+from fastapi.responses import JSONResponse
 
 
 from dotenv import load_dotenv
@@ -131,7 +132,7 @@ def download_file(file_id: int, db: Session = Depends(get_db)):
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Failed to generate download link")
 
-    return {"url": signed_url}
+    return JSONResponse(content={"url": signed_url})
      
 
 # @router.delete('/delete_all/{itinerary_id}')
