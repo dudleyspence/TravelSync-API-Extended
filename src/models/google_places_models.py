@@ -28,6 +28,8 @@ async def fetch_place_info(address):
    "fields": "formatted_address,name,business_status,place_id,geometry,rating",
    "key": api_key,
   }
+  print(address)
+  print(api_key)
 
   async with httpx.AsyncClient() as client:
     response = await client.get(base_url, params=params)
@@ -36,7 +38,10 @@ async def fetch_place_info(address):
             # if we just used ["candidates"] this could throw a keyError if there wasnt candidates
             # dictionaries have the .get(key, default_value)
             # having a default value avoids the keyError 
+            print(response)
+            
             locationInfo = response.json().get("candidates", [])
+            print(locationInfo)
             # the request might be successful 200 but return no results so we need to force a 404 not found
             if not locationInfo:
               print(locationInfo)

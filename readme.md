@@ -22,9 +22,6 @@ if this doesnt work it likely means the installed python has been named python3 
 ```
 echo "alias python=python3" >> ~/.zshrc
 source ~/.zshrc
-```
-
-```
 echo "alias pip=pip3" >> ~/.zshrc
 source ~/.zshrc
 ```
