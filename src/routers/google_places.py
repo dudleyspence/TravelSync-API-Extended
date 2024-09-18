@@ -4,22 +4,21 @@ from fastapi import APIRouter, HTTPException, Request
 
 router = APIRouter()
 @router.post('/info')
-async def get_place_info(request: Request):
-    body = await request.json()
-    address = body.get("addressStr", None)
-    place_id = body.get("place_id", None)
+async def get_place_info(address):
+
+    if not address:
+        raise HTTPException(status_code=422, detail="Address field is required")
+
 
     try:
-        if place_id:
-            response = await fetch_place_info(place_id=place_id)
-        else:
-            response = await fetch_place_info(address=address)
-
+        response = await fetch_place_info(address)
         return {"placeInfo": response}
-
     except HTTPException as err:
-        raise err
+        raise err #This is the errors we expect can happen e.g. 500, 404 
     except Exception as err:
+        # this catches unexpected non HTTP errors like ValueError or TypeError (code bugs)
+        # it presents this error to the client as an internal server error 500 with the error message
+        # this means errors are handled in consistent mannor
         raise HTTPException(status_code=500, detail=str(err))
 
 

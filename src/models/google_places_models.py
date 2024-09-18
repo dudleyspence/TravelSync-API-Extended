@@ -8,7 +8,7 @@ import os
 load_dotenv(".env.googleAPI") 
 # needed in development but not on render 
 
-async def fetch_place_info(address=None, place_id=None):
+async def fetch_place_info(address):
   api_key = os.getenv('GOOGLE_API_KEY')
   # Print the API key to verify it's loaded correctly
   if api_key:
@@ -16,22 +16,16 @@ async def fetch_place_info(address=None, place_id=None):
   else:
     print("API Key not found. Please check your .env file and path.")
 
-    if place_id:
-        base_url = "https://maps.googleapis.com/maps/api/place/details/json"
-        params = {
-            "place_id": place_id,
-            "fields": "formatted_address,name,business_status,place_id,geometry,rating",
-            "key": api_key,
-        }
-    elif address:
-        base_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
-        params = {
-            "input": address,
-            "inputtype": "textquery",
-            "language": "en",
-            "fields": "formatted_address,name,business_status,place_id,geometry,rating",
-            "key": api_key,
-        }
+# Base URL
+  base_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
+# Parameters in a dictionary
+  params = {
+   "input": address,
+   "inputtype": "textquery",
+   "language": "en",
+   "fields": "formatted_address,name,business_status,place_id,geometry,rating",
+   "key": api_key,
+  }
 
 
   async with httpx.AsyncClient() as client:
@@ -41,9 +35,8 @@ async def fetch_place_info(address=None, place_id=None):
             # if we just used ["candidates"] this could throw a keyError if there wasnt candidates
             # dictionaries have the .get(key, default_value)
             # having a default value avoids the keyError 
-            print(response.json())
+            
             locationInfo = response.json().get("candidates", [])
-            print(locationInfo)
 
             # the request might be successful 200 but return no results so we need to force a 404 not found
             if not locationInfo:
