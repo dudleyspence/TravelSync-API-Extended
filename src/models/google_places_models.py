@@ -35,8 +35,10 @@ async def fetch_place_info(address):
             # if we just used ["candidates"] this could throw a keyError if there wasnt candidates
             # dictionaries have the .get(key, default_value)
             # having a default value avoids the keyError 
-            
+            print(response.json())
             locationInfo = response.json().get("candidates", [])
+            print(locationInfo)
+
             # the request might be successful 200 but return no results so we need to force a 404 not found
             if not locationInfo:
               raise HTTPException(status_code=404, detail="No results found")
