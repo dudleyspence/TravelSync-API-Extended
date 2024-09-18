@@ -5,17 +5,15 @@ import os
 
 
 # Load the environment variables from the .env file
-load_dotenv("../TravelSync-API/.env.googleAPI") 
+load_dotenv(".env.googleAPI") 
 # needed in development but not on render 
 
 async def fetch_place_info(address):
   api_key = os.getenv('GOOGLE_API_KEY')
-  
   # Print the API key to verify it's loaded correctly
   if api_key:
     print("API Key loaded successfully:", api_key)
   else:
-    print("hello")
     print("API Key not found. Please check your .env file and path.")
 
 # Base URL
@@ -28,8 +26,7 @@ async def fetch_place_info(address):
    "fields": "formatted_address,name,business_status,place_id,geometry,rating",
    "key": api_key,
   }
-  print(address)
-  print(api_key)
+
 
   async with httpx.AsyncClient() as client:
     response = await client.get(base_url, params=params)
@@ -38,13 +35,10 @@ async def fetch_place_info(address):
             # if we just used ["candidates"] this could throw a keyError if there wasnt candidates
             # dictionaries have the .get(key, default_value)
             # having a default value avoids the keyError 
-            print(response)
             
             locationInfo = response.json().get("candidates", [])
-            print(locationInfo)
             # the request might be successful 200 but return no results so we need to force a 404 not found
             if not locationInfo:
-              print(locationInfo)
               raise HTTPException(status_code=404, detail="No results found")
             
             return locationInfo
