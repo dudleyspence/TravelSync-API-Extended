@@ -1,130 +1,87 @@
-### Create the basic project directory
+This project began as an Agile group for 4 taking part in a project phase. Once this phase ended I decided to independantly continue with the project.
 
-Initilize Git
+This original group repository can be found here [https://github.com/dudleyspence/TravelSync-API-Group](https://github.com/dudleyspence/TravelSync-API-Group.git)
 
-```
-git init
-```
+# TravelSync API
 
-use the following to make a virtual environment:
+Welcome to the TravelSync API! This RESTful API powers the backend of the TravelSync application, enabling users to create and manage group itineraries with ease. The API integrates with various services, including Google Places and Mapbox, to provide enhanced location-based features.
 
-```
-python -m venv venv
-```
+## Table of Contents
 
-Why do we need venv in python?
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage and Endpoints](#usage-and-endpoints)
+- [Authentication](#authentication)
 
-- Dependency Management: Keeps your project’s dependencies isolated from the system-wide Python installation.
-- Environment Consistency: Ensures consistent behavior across different development environments.
+## Features
 
-if this doesnt work it likely means the installed python has been named python3 rather than python. This means we will also have pip3 rather than pip. To resolve this we will make a name alias for both:
+- **Group Itinerary Management**: Create, edit, and delete group itineraries and invite friends to collaborate.
+- **Location-Based Services**: Fetch location data from Google Places API and visualize it using Mapbox.
+- **User Authentication**: Secure user login and management using Firebase Authentication.
+- **Dynamic Routing**: Efficient routing with FastAPI's router capabilities.
+- **Data Validation**: Robust data validation using Pydantic models.
+- **File Storage**: Upload, download and delete files using firebase filestorage.
 
-```
-echo "alias python=python3" >> ~/.zshrc
-source ~/.zshrc
-echo "alias pip=pip3" >> ~/.zshrc
-source ~/.zshrc
-```
+## Technologies Used
 
-now try again
+- **FastAPI**: A modern, fast (high-performance) web framework for building APIs with Python.
+- **SQLAlchemy**: SQL toolkit and Object-Relational Mapping (ORM) library for Python.
+- **MySQL**: Relational database management system for efficient data storage and retrieval.
+- **Pydantic**: Data validation and settings management using Python type annotations.
+- **Google Places API**: To fetch and manage location data.
+- **Firebase Authentication**: For secure user authentication.
 
-once this is made, activate the venv using:
+## Installation
 
-```
-source venv/bin/activate
-```
+1. **Clone the repository**:
 
-in the main project directory make a src folder that will house the main code:
-make the first python file main.py
+   ```bash
+   git clone https://github.com/yourusername/travelsync-api.git
+   cd travelsync-api
+   ```
 
-```
-my_project/
-├── src/
-│   └── my_module/
-│       ├── __init__.py
-│       └── calculator.py
-├── tests/
-│   ├── __init__.py
-│   └── test_calculator.py
-├── requirements.txt
-├── setup.py
-└── README.md
-```
+2. **Create and activate a virtual environment**:
 
-**_Install first dependancy fastAPI:_**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
 
-```
-pip install fastapi uvicorn
-```
+3. **Install the required dependencies**:
 
-to then run the server we can use from the root dir
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```
-fastapi dev src/app.py
-```
+4. **Set up environment variables**:
 
-but this isnt needed yet.
+   Create a `.env` file in the root directory and add the following variables:
 
-**\* Dependancy Management with requirements.txt \***
+   ```plaintext
+   DATABASE_URL=mysql+pymysql://username:password@localhost/travelsync
+   GOOGLE_API_KEY=your_google_places_api_key
+   FIREBASE_CONFIG=your_firebase_config
+   ```
 
-The requirements.txt file lists all the Python packages your project depends on. This ensures that anyone working on the project can install the exact versions of packages needed.
+5. **Run database setup and seed**:
 
-```
-pip freeze > requirements.txt
-```
+   ```bash
+   python -m src.db.setup_and_seed
+   ```
 
-This command captures all currently installed packages in your virtual environment and writes them to requirements.txt.
+6. **Start the FastAPI server**:
 
-Therefore each time dependancies are installed during development it is important to run this code again to update the requirements.txt.
+   ```bash
+   fastapi dev src/app.py
+   ```
 
-Others can install these dependencies by running:
+## Usage and Endpoints
 
-```
-pip install -r requirements.txt
-```
+Once the server is running, you can access the API documentation at `http://localhost:8000/docs` (Swagger UI)
 
-**_.gitignore_**
+Refer to the [API Documentation](http://localhost:8000/docs) for a complete list of endpoints and their descriptions.
 
-- .gitignore: Specifies files and directories that Git should ignore, like venv/, **pycache**/, and other generated files.
+## Authentication
 
-Virtual environment directory (venv) (not typically included in version control).
-
-For making API requests we will need the following dependancy
-
-```
-pip install requests
-```
-
-### Google Places API
-
-find the docs here
-
-```
-https://developers.google.com/maps/documentation/places/web-service/search-nearby#maps_http_places_nearbysearch-txt
-```
-
-**_create google cloud console account_**
-
-- create an account and add a billing option
-- create a project and enable the placesAPI (new)
-- go to the credentials page and create an API (restricted)
-- add API to a .env file and add .env to the .gitignore
-
-\*\*\*TEST-DRIVEN DEVELOPMENT
-
-so i will be using pytest as it seems to be quite beginner friendly and is a widely adopted choice.
-to run tests we need to use the command
-
-```
-pytest
-```
-
-\*\*\*Setting up the database
-
-to create the database and then seed it
-
-run this command from the root dir
-
-```
-python -m src.db.setup_and_seed
-```
+Authentication is handled using Firebase Authentication. Users must be authenticated to perform actions such as creating or modifying itineraries. Include the Firebase Auth token in the request headers as follows:
