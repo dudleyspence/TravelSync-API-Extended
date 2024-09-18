@@ -8,7 +8,7 @@ import os
 load_dotenv(".env.googleAPI") 
 # needed in development but not on render 
 
-async def fetch_place_info(address):
+async def fetch_place_info(address=None, place_id=None):
   api_key = os.getenv('GOOGLE_API_KEY')
   # Print the API key to verify it's loaded correctly
   if api_key:
@@ -16,16 +16,22 @@ async def fetch_place_info(address):
   else:
     print("API Key not found. Please check your .env file and path.")
 
-# Base URL
-  base_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
-# Parameters in a dictionary
-  params = {
-   "input": address,
-   "inputtype": "textquery",
-   "language": "en",
-   "fields": "formatted_address,name,business_status,place_id,geometry,rating",
-   "key": api_key,
-  }
+    if place_id:
+        base_url = "https://maps.googleapis.com/maps/api/place/details/json"
+        params = {
+            "place_id": place_id,
+            "fields": "formatted_address,name,business_status,place_id,geometry,rating",
+            "key": api_key,
+        }
+    elif address:
+        base_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
+        params = {
+            "input": address,
+            "inputtype": "textquery",
+            "language": "en",
+            "fields": "formatted_address,name,business_status,place_id,geometry,rating",
+            "key": api_key,
+        }
 
 
   async with httpx.AsyncClient() as client:
