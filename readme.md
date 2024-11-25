@@ -1,87 +1,120 @@
-This project began as an Agile group for 4 taking part in a project phase. Once this phase ended I decided to independantly continue with the project.
+# **TravelSync API**
 
-This original group repository can be found here [https://github.com/dudleyspence/TravelSync-API-Group](https://github.com/dudleyspence/TravelSync-API-Group.git)
+**Description**  
+The **TravelSync API** powers the backend of the TravelSync application, designed to make group itinerary planning effortless. It provides robust functionality for creating and managing itineraries, integrating with services like **Google Places** and **Mapbox** to deliver location-based features. Originally developed during an Agile group project, this API has been independently expanded for enhanced capabilities.
 
-# TravelSync API
+Original group repository:  
+[TravelSync API Group Repository](https://github.com/dudleyspence/TravelSync-API-Group)
 
-Welcome to the TravelSync API! This RESTful API powers the backend of the TravelSync application, enabling users to create and manage group itineraries with ease. The API integrates with various services, including Google Places and Mapbox, to provide enhanced location-based features.
+----------
 
-## Table of Contents
+## **Features**
 
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage and Endpoints](#usage-and-endpoints)
-- [Authentication](#authentication)
+-   **Group Itinerary Management**: Easily create, edit, and delete group itineraries while inviting friends to collaborate.
+-   **Location-Based Services**: Fetch and manage location data using **Google Places API** and visualise it with **Mapbox**.
+-   **User Authentication**: Secure login and user management using **Firebase Authentication**.
+-   **Dynamic Routing**: Efficiently handle requests with **FastAPI**'s router capabilities.
+-   **Data Validation**: Robust data validation using **Pydantic** models for seamless operation.
+-   **File Storage**: Upload, download, and delete files securely using **Firebase Storage**.
 
-## Features
+----------
 
-- **Group Itinerary Management**: Create, edit, and delete group itineraries and invite friends to collaborate.
-- **Location-Based Services**: Fetch location data from Google Places API and visualize it using Mapbox.
-- **User Authentication**: Secure user login and management using Firebase Authentication.
-- **Dynamic Routing**: Efficient routing with FastAPI's router capabilities.
-- **Data Validation**: Robust data validation using Pydantic models.
-- **File Storage**: Upload, download and delete files using firebase filestorage.
+## **Technologies Used**
 
-## Technologies Used
+-   **Backend Framework**: FastAPI
+-   **Database**: MySQL, managed with SQLAlchemy ORM
+-   **Validation**: Pydantic for type-safe data validation
+-   **APIs**: Google Places API and Firebase Authentication
+-   **Hosting**: Deployed via Render  
 
-- **FastAPI**: A modern, fast (high-performance) web framework for building APIs with Python.
-- **SQLAlchemy**: SQL toolkit and Object-Relational Mapping (ORM) library for Python.
-- **MySQL**: Relational database management system for efficient data storage and retrieval.
-- **Pydantic**: Data validation and settings management using Python type annotations.
-- **Google Places API**: To fetch and manage location data.
-- **Firebase Authentication**: For secure user authentication.
+----------
 
-## Installation
+## **How to Use**
 
-1. **Clone the repository**:
+### **Using the API**
 
-   ```bash
-   git clone https://github.com/yourusername/travelsync-api.git
-   cd travelsync-api
-   ```
+1.  The API is designed to serve as the backend for the TravelSync application.
+2.  Access endpoints for itinerary management, location data, and file storage through authenticated requests.
+3.  For a complete list of endpoints and descriptions, refer to the **API Documentation** (see below).
 
-2. **Create and activate a virtual environment**:
+----------
 
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
+## **Code Overview**
 
-3. **Install the required dependencies**:
+### **Core Features**
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+-   **Dynamic Routing**: Modular routing with FastAPI ensures scalability and clarity.
+-   **Database Integration**: SQLAlchemy ORM manages efficient data storage and retrieval in MySQL.
+-   **Authentication Middleware**: Firebase Authentication secures all user-related operations.
 
-4. **Set up environment variables**:
+### **Endpoints**
 
-   Create a `.env` file in the root directory and add the following variables:
+Detailed API documentation is available when running the server:  
+Access the Swagger UI at `http://localhost:8000/docs` for a full list of endpoints, parameters, and example requests.
 
-   ```plaintext
-   DATABASE_URL=mysql+pymysql://username:password@localhost/travelsync
-   GOOGLE_API_KEY=your_google_places_api_key
-   FIREBASE_CONFIG=your_firebase_config
-   ```
+### **Error Handling**
 
-5. **Run database setup and seed**:
+-   Comprehensive error management ensures clear, user-friendly messages for invalid data or unauthorised access.
 
-   ```bash
-   python -m src.db.setup_and_seed
-   ```
+----------
 
-6. **Start the FastAPI server**:
+## **For Developers**
 
-   ```bash
-   fastapi dev src/app.py
-   ```
+If you wish to contribute or run the project locally, follow these steps:
 
-## Usage and Endpoints
+### **Prerequisites**
 
-Once the server is running, you can access the API documentation at `http://localhost:8000/docs` (Swagger UI)
+-   **Python** (3.8 or higher)
+-   **MySQL**
 
-Refer to the [API Documentation](http://localhost:8000/docs) for a complete list of endpoints and their descriptions.
+### **Installation**
 
-## Authentication
+1.  Clone the repository:  
+    `git clone https://github.com/dudleyspence/travelsync-api.git`
 
-Authentication is handled using Firebase Authentication. Users must be authenticated to perform actions such as creating or modifying itineraries. Include the Firebase Auth token in the request headers as follows:
+2.  Navigate to the project directory:  
+    `cd travelsync-api`
+
+3.  Create a virtual environment:  
+    `python -m venv venv`  
+    Activate it:  
+    `source venv/bin/activate` (Windows: `venv\Scripts\activate`)
+
+4.  Install dependencies:  
+    `pip install -r requirements.txt`
+
+5.  Configure environment variables:  
+    Create a `.env` file with the following:
+    ```plaintext
+    DATABASE_URL=mysql+pymysql://username:password@localhost/travelsync
+    GOOGLE_API_KEY=your_google_places_api_key
+    FIREBASE_CONFIG=your_firebase_config
+    ```
+
+6.  Set up and seed the database:  
+    `python -m src.db.setup_and_seed`
+
+7.  Run the server:  
+    `uvicorn src.app:app --reload`
+
+Access the API locally at `http://localhost:8000`.
+
+----------
+
+## **Future Enhancements**
+
+-   **Enhanced Group Management**: Add role-based permissions for itinerary collaborators.
+-   **Integration with Calendar APIs**: Allow syncing itineraries with popular calendar services.
+-   **Offline Mode**: Implement data caching for limited offline functionality.
+
+----------
+
+## **Contributing**
+
+Contributions are welcome! Fork the repository, make your changes, and submit a pull request for review.
+
+----------
+
+## **License**
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
