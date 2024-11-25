@@ -118,3 +118,29 @@ Contributions are welcome! Fork the repository, make your changes, and submit a 
 ## **License**
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+----------
+
+## **Related Repositories**
+
+
+
+<div width="100%" align="center">
+    <a href="https://github.com/dudleyspence/TravelSync-API-Extended" align="left">
+        <img align="left" width="45%" src="https://github-readme-stats.vercel.app/api/pin/?username=dudleyspence&repo=TravelSync-API-Extended&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=0f172a&hide_border=true&locale=en" />
+    </a>
+    <a href="https://github.com/dudleyspence/TravelSync-FE-Extended" align="right">
+        <img align="right" width="45%" src="https://github-readme-stats.vercel.app/api/pin/?username=dudleyspence&repo=TravelSync-FE-Extended&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=0f172a&hide_border=true&locale=en" />
+    </a>
+</div>
+<br /><br /><br /><br /><br /><br /><br />
+<div width="100%" align="center">
+    <a href="https://github.com/dudleyspence/TravelSync-FE-Group" align="left">
+        <img align="left" width="45%" src="https://github-readme-stats.vercel.app/api/pin/?username=dudleyspence&repo=TravelSync-FE-Group&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=0f172a&hide_border=true&locale=en" />
+    </a>
+    <a href="https://github.com/dudleyspence/TravelSync-API-Group" align="right">
+        <img align="right" width="45%" src="https://github-readme-stats.vercel.app/api/pin/?username=dudleyspence&repo=TravelSync-API-Group&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=0f172a&hide_border=true&locale=en" />
+    </a>
+</div>
+<br /><br /><br /><br /><br /><br /><br />
+
