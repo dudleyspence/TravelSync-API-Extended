@@ -3,7 +3,7 @@
 from .user import User
 from .itinerary_member import ItineraryMember
 from .itinerary import Itinerary
-from .itinerary_event import ItineraryEvent
+from .itinerary_location import ItineraryLocation
 from .file import File
 
 from src.db import Base
