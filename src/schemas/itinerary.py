@@ -8,13 +8,9 @@ class ItineraryBase(BaseModel):
 class ItineraryCreate(ItineraryBase):
     pass
 
-class ItineraryUpdate(BaseModel):
-    itinerary_order: List[int]
-
 class ItineraryResponse(ItineraryBase):
     id: int
     join_code: str
-    itinerary_order: List[int]
     created_at: datetime
 
     class Config:
@@ -23,3 +19,6 @@ class ItineraryResponse(ItineraryBase):
 class JoinItineraryRequest(BaseModel):
     user_id: str
     join_code: str
+
+class ItineraryReorderRequest(BaseModel):
+    location_ids: List[int]

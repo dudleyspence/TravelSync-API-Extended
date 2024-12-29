@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from .database import engine, Base, SessionLocal
-from src.models import User, Itinerary, ItineraryMember, ItineraryEvent
+from src.models import User, Itinerary, ItineraryMember, ItineraryLocation
 import json
 import pymysql
 import os
@@ -70,8 +70,8 @@ def seed_data(db: Session):
     with open('src/db/data/itineraries.json') as file:
         itineraries = json.load(file)
 
-    with open('src/db/data/itinerary_events.json') as file:
-        itinerary_events = json.load(file)
+    with open('src/db/data/itinerary_locations.json') as file:
+        itinerary_locations = json.load(file)
 
     # Add data to the session
     for user in users:
@@ -86,8 +86,8 @@ def seed_data(db: Session):
         db.add(ItineraryMember(**itinerary_member))
     db.commit()
 
-    for itinerary_event in itinerary_events:
-        db.add(ItineraryEvent(**itinerary_event))
+    for itinerary_event in itinerary_locations:
+        db.add(ItineraryLocation(**itinerary_locations))
     db.commit()
 
 

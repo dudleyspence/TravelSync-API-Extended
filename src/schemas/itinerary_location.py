@@ -1,18 +1,17 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-class ItineraryEventBase(BaseModel):
-    name: str
-    coords: str
+class ItineraryLocationBase(BaseModel):
     place_id: str
 
-class ItineraryEventCreate(ItineraryEventBase):
+class ItineraryLocationCreate(ItineraryLocationBase):
     pass
 
-class ItineraryEventResponse(ItineraryEventBase):
+class ItineraryLocationResponse(ItineraryLocationBase):
     itinerary_id: int 
     id: int
     created_at: datetime
+    order_index: int 
 
     class Config:
         orm_mode = True
