@@ -86,8 +86,8 @@ def seed_data(db: Session):
         db.add(ItineraryMember(**itinerary_member))
     db.commit()
 
-    for itinerary_event in itinerary_locations:
-        db.add(ItineraryLocation(**itinerary_locations))
+    for itinerary_location in itinerary_locations:
+        db.add(ItineraryLocation(**itinerary_location))
     db.commit()
 
 
