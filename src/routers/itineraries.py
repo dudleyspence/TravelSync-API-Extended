@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.attributes import flag_modified
-from src.schemas import ItineraryCreate, ItineraryResponse, ItineraryLocationCreate, ItineraryLocationResponse, ItineraryUpdate , ItineraryReorderRequest
+from src.schemas import ItineraryCreate, ItineraryResponse, ItineraryLocationCreate, ItineraryLocationResponse, ItineraryReorderRequest
 from src.models import Itinerary, ItineraryLocation
 from src.db.database import get_db
 from typing import List
