@@ -4,8 +4,6 @@ from datetime import datetime
 class ItineraryLocationBase(BaseModel):
     place_id: str
 
-class ItineraryLocationCreate(ItineraryLocationBase):
-    pass
 
 class ItineraryLocationResponse(ItineraryLocationBase):
     itinerary_id: int 

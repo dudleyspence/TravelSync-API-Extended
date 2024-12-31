@@ -59,10 +59,10 @@ def get_itinerary_locations(
 
 
 # Add a new event to the itinerary
-@router.post("/{itinerary_id}/locations", response_model=ItineraryLocationResponse)
+@router.post("/{itinerary_id}/locations/{place_id}", response_model=ItineraryLocationResponse)
 def add_itinerary_location(
     itinerary_id: int,
-    location_data: ItineraryLocationCreate,
+    place_id: str,
     db: Session = Depends(get_db)
 ) -> ItineraryLocationResponse:
     # Make sure itinerary exists
@@ -81,7 +81,7 @@ def add_itinerary_location(
 
     new_location = ItineraryLocation(
         itinerary_id=itinerary_id,
-        place_id=location_data.place_id,
+        place_id=place_id,
         order_index=next_index,
     )
     db.add(new_location)
