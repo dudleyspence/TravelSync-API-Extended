@@ -21,4 +21,4 @@ class JoinItineraryRequest(BaseModel):
     join_code: str
 
 class ItineraryReorderRequest(BaseModel):
-    location_ids: List[int]
+    location_ids_order: List[int]

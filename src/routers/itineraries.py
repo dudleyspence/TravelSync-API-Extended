@@ -99,6 +99,8 @@ def reorder_itinerary_locations(
     db: Session = Depends(get_db)
 ) -> List[ItineraryLocationResponse]:
     
+    print(reorder_data)
+    
     # using enumerate will give the index and the value of the ids
     # This means for each location we can set the order_index to be the index
     for index, loc_id in enumerate(reorder_data.location_ids_order):
