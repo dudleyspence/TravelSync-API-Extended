@@ -1,77 +1,77 @@
 [
   {
     "id": 5,
-    "itinerary_id": 2,
+    "itinerary_id": 1,
     "place_id": "ChIJrRQV8Sl1TBMRQgJUuy8kapE",
     "created_at": "2024-08-22T13:20:00",
     "order_index": 1
   },
   {
     "id": 6,
-    "itinerary_id": 2,
+    "itinerary_id": 1,
     "place_id": "ChIJt3_knzILTBMRp0ubMouCf_g",
     "created_at": "2024-08-22T13:25:00",
     "order_index": 2
   },
   {
     "id": 7,
-    "itinerary_id": 2,
+    "itinerary_id": 1,
     "place_id": "ChIJIc8rUjILTBMR5n-7QIFkIk4",
     "created_at": "2024-08-22T13:30:00",
     "order_index": 3
   },
   {
     "id": 8,
-    "itinerary_id": 2,
+    "itinerary_id": 1,
     "place_id": "ChIJy8JBdTILTBMRnUoRue5MHd8",
     "created_at": "2024-08-22T13:35:00",
     "order_index": 4
   },
   {
     "id": 9,
-    "itinerary_id": 2,
+    "itinerary_id": 1,
     "place_id": "ChIJiSJigjILTBMRbCumNH1vQaw",
     "created_at": "2024-08-22T13:40:00",
     "order_index": 5
   },
   {
     "id": 10,
-    "itinerary_id": 2,
+    "itinerary_id": 1,
     "place_id": "ChIJh3rhADMLTBMRS4ifiDjqUOI",
     "created_at": "2024-08-22T13:45:00",
     "order_index": 6
   },
   {
     "id": 11,
-    "itinerary_id": 3,
+    "itinerary_id": 2,
     "place_id": "ChIJGUgrYPGipBIRS9ZgHK_C7B4",
     "created_at": "2024-08-22T14:00:00",
     "order_index": 1
   },
   {
     "id": 12,
-    "itinerary_id": 3,
+    "itinerary_id": 2,
     "place_id": "ChIJ1eGKmZOipBIRah43T2Kjn8Q",
     "created_at": "2024-08-22T14:05:00",
     "order_index": 2
   },
   {
     "id": 13,
-    "itinerary_id": 3,
+    "itinerary_id": 2,
     "place_id": "ChIJYUFLSe2ipBIRD04uni940kA",
     "created_at": "2024-08-22T14:10:00",
     "order_index": 3
   },
   {
     "id": 14,
-    "itinerary_id": 3,
+    "itinerary_id": 2,
     "place_id": "ChIJFf0mA_yipBIRmrj06fT0Zfc",
     "created_at": "2024-08-22T14:15:00",
     "order_index": 4
   },
   {
     "id": 15,
-    "itinerary_id": 3,
+    "itinerary_id": 2,
     "place_id": "ChIJ3fHTIFiipBIRpKXCn_E_oJY",
     "created_at": "2024-08-22T14:20:00",
     "order_index": 5

@@ -1,18 +1,12 @@
 [
   {
     "id": 1,
-    "name": "Trip to Dubrovnik",
-    "created_at": "2024-08-22T12:00:00",
-    "join_code": "A1B2C3"
-  },
-  {
-    "id": 2,
     "name": "Trip to Historical Sites",
     "created_at": "2024-08-22T12:05:00",
     "join_code": "D4E5F6"
   },
   {
-    "id": 3,
+    "id": 1,
     "name": "Trip to Barcelona",
     "created_at": "2024-08-22T12:10:00",
     "join_code": "G7H8I9"
