@@ -91,6 +91,7 @@ def add_itinerary_location(
     return new_location
 
 
+# using put not patch because we change/update the order of the intire itinerary
 @router.put("/{itinerary_id}/reorder", response_model=List[ItineraryLocationResponse])
 def reorder_itinerary_locations(
     itinerary_id: int,
@@ -100,7 +101,7 @@ def reorder_itinerary_locations(
     
     # using enumerate will give the index and the value of the ids
     # This means for each location we can set the order_index to be the index
-    for index, loc_id in enumerate(reorder_data.location_ids):
+    for index, loc_id in enumerate(reorder_data.location_ids_order):
 
         db.query(ItineraryLocation).filter(
             ItineraryLocation.id == loc_id,
