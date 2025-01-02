@@ -14,19 +14,26 @@ router = APIRouter()
 from fastapi import HTTPException
 
 # Create a new itinerary
+from pydantic import BaseModel
+
+# Define the request schema
+class CreateItineraryRequest(BaseModel):
+    name: str
+    user_id: int
+
+# Update the route to use the Pydantic model
 @router.post('', response_model=ItineraryResponse)
 def create_itinerary(
-    data: ItineraryCreate,
+    data: CreateItineraryRequest,
     db: Session = Depends(get_db)
 ) -> ItineraryResponse:
-    
     join_code = generate_join_code()
 
     while db.query(Itinerary).filter(Itinerary.join_code == join_code).first() is not None:
         join_code = generate_join_code()
 
     new_itinerary = Itinerary(
-        name=name,
+        name=data.name,
         join_code=join_code
     )
     db.add(new_itinerary)
@@ -34,7 +41,7 @@ def create_itinerary(
     db.refresh(new_itinerary)
 
     new_member = ItineraryMember(
-        user_id=user_id,
+        user_id=data.user_id,
         itinerary_id=new_itinerary.id
     )
     db.add(new_member)
@@ -42,6 +49,7 @@ def create_itinerary(
     db.refresh(new_member)
 
     return new_itinerary
+
 
 
 # Gets an itinerary using an itinerary_id
