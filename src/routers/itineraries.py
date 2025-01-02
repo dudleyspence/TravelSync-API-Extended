@@ -11,23 +11,37 @@ from .utils import generate_join_code
 router = APIRouter()
 
 
-# Create new itinerary
+from fastapi import HTTPException
+
+# Create a new itinerary
 @router.post('', response_model=ItineraryResponse)
-def create_itinerary(itinerary: ItineraryCreate, db: Session = Depends(get_db)) -> ItineraryResponse:
+def create_itinerary(
+    name: str,
+    user_id: int,
+    db: Session = Depends(get_db)
+) -> ItineraryResponse:
+    
     join_code = generate_join_code()
 
-    # check for unique join code
     while db.query(Itinerary).filter(Itinerary.join_code == join_code).first() is not None:
         join_code = generate_join_code()
 
     new_itinerary = Itinerary(
-        name=itinerary.name,
+        name=name,
         join_code=join_code
     )
-
     db.add(new_itinerary)
     db.commit()
     db.refresh(new_itinerary)
+
+    new_member = ItineraryMember(
+        user_id=user_id,
+        itinerary_id=new_itinerary.id
+    )
+    db.add(new_member)
+    db.commit()
+    db.refresh(new_member)
+
     return new_itinerary
 
 
