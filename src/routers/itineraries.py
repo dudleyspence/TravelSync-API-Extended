@@ -16,12 +16,7 @@ from fastapi import HTTPException
 # Create a new itinerary
 from pydantic import BaseModel
 
-# Define the request schema
-class CreateItineraryRequest(BaseModel):
-    name: str
-    user_id: int
 
-# Update the route to use the Pydantic model
 @router.post('', response_model=ItineraryResponse)
 def create_itinerary(
     data: ItineraryCreate,
