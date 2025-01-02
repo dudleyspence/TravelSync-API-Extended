@@ -22,3 +22,15 @@ class JoinItineraryRequest(BaseModel):
 
 class ItineraryReorderRequest(BaseModel):
     location_ids_order: List[int]
+
+
+class ItinerarySummaryResponse(BaseModel):
+    id: int
+    name: str
+    join_code: str
+    created_at: datetime
+    total_locations: int
+    total_members: int
+
+    class Config:
+        orm_mode = True

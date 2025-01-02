@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.attributes import flag_modified
-from src.schemas import ItineraryCreate, ItineraryResponse, ItineraryLocationResponse, ItineraryReorderRequest
-from src.models import Itinerary, ItineraryLocation
+from src.schemas import ItineraryCreate, ItineraryResponse, ItineraryLocationResponse, ItineraryReorderRequest, ItinerarySummaryResponse
+from src.models import Itinerary, ItineraryLocation, ItineraryMember
 from src.db.database import get_db
 from typing import List
 from .utils import generate_join_code
@@ -131,3 +132,43 @@ def delete_itinerary(itinerary_id: int, db: Session = Depends(get_db)) -> Itiner
     db.delete(db_itinerary)
     db.commit()
     return db_itinerary
+
+
+
+
+
+
+
+@router.get('/{itinerary_id}/summary', response_model=ItinerarySummaryResponse)
+def get_itinerary_summary(itinerary_id: int, db: Session = Depends(get_db)) -> ItinerarySummaryResponse:
+    # fetchinf the itinerary
+    itinerary = db.query(Itinerary).filter(Itinerary.id == itinerary_id).first()
+    if not itinerary:
+        raise HTTPException(status_code=404, detail="Itinerary not found")
+
+    # total locations in the itinerary
+    total_locations = (
+        db.query(func.count(ItineraryLocation.id))
+        .filter(ItineraryLocation.itinerary_id == itinerary_id)
+        .scalar()
+    )
+    # using scalar ensures a single scalar value is returned
+
+    # total members in the itinerary
+    total_members = (
+        db.query(func.count(ItineraryMember.id))
+        .filter(ItineraryMember.itinerary_id == itinerary_id)
+        .scalar()
+    )
+
+    # summary response
+    itinerary_summary = {
+        "id": itinerary.id,
+        "name": itinerary.name,
+        "join_code": itinerary.join_code,
+        "created_at": itinerary.created_at,
+        "total_locations": total_locations,
+        "total_members": total_members,
+    }
+
+    return itinerary_summary
