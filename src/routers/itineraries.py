@@ -23,7 +23,8 @@ def create_itinerary(
     db: Session = Depends(get_db)
 ) -> ItineraryResponse:
     join_code = generate_join_code()
-
+    
+    print(data)
     while db.query(Itinerary).filter(Itinerary.join_code == join_code).first() is not None:
         join_code = generate_join_code()
 
