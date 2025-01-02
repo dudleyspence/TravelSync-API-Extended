@@ -16,8 +16,7 @@ from fastapi import HTTPException
 # Create a new itinerary
 @router.post('', response_model=ItineraryResponse)
 def create_itinerary(
-    name: str,
-    user_id: int,
+    data: ItineraryCreate,
     db: Session = Depends(get_db)
 ) -> ItineraryResponse:
     

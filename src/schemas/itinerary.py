@@ -6,7 +6,7 @@ class ItineraryBase(BaseModel):
     name: str
 
 class ItineraryCreate(ItineraryBase):
-    pass
+    user_id: int
 
 class ItineraryResponse(ItineraryBase):
     id: int
