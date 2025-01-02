@@ -24,7 +24,7 @@ class CreateItineraryRequest(BaseModel):
 # Update the route to use the Pydantic model
 @router.post('', response_model=ItineraryResponse)
 def create_itinerary(
-    data: CreateItineraryRequest,
+    data: ItineraryCreate,
     db: Session = Depends(get_db)
 ) -> ItineraryResponse:
     join_code = generate_join_code()
