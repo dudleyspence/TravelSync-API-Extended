@@ -36,8 +36,13 @@ def get_user_itineraries(user_id: str, db: Session = Depends(get_db)):
     #  making a loop that extracts into a list the itinerary_ids for all the itineraries this user is a member of
     itinerary_ids = [membership.itinerary_id for membership in itinerary_memberships]
 
-    itineraries = db.query(Itinerary).filter(Itinerary.id.in_(itinerary_ids)).all()
-
+    itineraries = (
+        db.query(Itinerary)
+        .filter(Itinerary.id.in_(itinerary_ids))
+        .order_by(Itinerary.created_at.desc())
+        .all()
+    )
+    
     return itineraries  
 
 
