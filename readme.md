@@ -1,7 +1,7 @@
 # **TravelSync API**
 
 **Description**  
-The **TravelSync API** powers the backend of the TravelSync application, designed to make group itinerary planning effortless. It provides robust functionality for creating and managing itineraries, integrating with services like **Google Places** and **Mapbox** to deliver location-based features. Originally developed during an Agile group project, this API has been independently expanded for enhanced capabilities.
+The **TravelSync API** powers the backend of the TravelSync application, designed to make group itinerary planning effortless. Originally developed during an Agile group project, this API has been independently expanded for enhanced capabilities.
 
 Original group repository:  
 [TravelSync API Group Repository](https://github.com/dudleyspence/TravelSync-API-Group)
@@ -11,11 +11,9 @@ Original group repository:
 ## **Features**
 
 -   **Group Itinerary Management**: Easily create, edit, and delete group itineraries while inviting friends to collaborate.
--   **Location-Based Services**: Fetch and manage location data using **Google Places API** and visualise it with **Mapbox**.
 -   **User Authentication**: Secure login and user management using **Firebase Authentication**.
 -   **Dynamic Routing**: Efficiently handle requests with **FastAPI**'s router capabilities.
 -   **Data Validation**: Robust data validation using **Pydantic** models for seamless operation.
--   **File Storage**: Upload, download, and delete files securely using **Firebase Storage**.
 
 ----------
 
@@ -24,7 +22,6 @@ Original group repository:
 -   **Backend Framework**: FastAPI
 -   **Database**: MySQL, managed with SQLAlchemy ORM
 -   **Validation**: Pydantic for type-safe data validation
--   **APIs**: Google Places API and Firebase Authentication
 -   **Hosting**: Deployed via Render  
 
 ----------
@@ -134,8 +131,8 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
                 </a>
             </td>
             <td align="center" width="50%">
-                <a href="https://github.com/dudleyspence/TravelSync-FE-Extended">
-                    <img src="https://github-readme-stats.vercel.app/api/pin/?username=dudleyspence&repo=TravelSync-FE-Extended&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=0f172a&hide_border=true&locale=en" />
+                <a href="https://github.com/dudleyspence/TravelSync">
+                    <img src="https://github-readme-stats.vercel.app/api/pin/?username=dudleyspence&repo=TravelSync&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=0f172a&hide_border=true&locale=en" />
                 </a>
             </td>
         </tr>
